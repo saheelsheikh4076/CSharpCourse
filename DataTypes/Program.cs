@@ -36,5 +36,4 @@ catch (Exception ex)
 finally
 {
     Console.WriteLine($"Is Succeeded : {isSucceeded}, and value is {a}");
-
 }
