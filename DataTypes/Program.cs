@@ -1,47 +1,40 @@
 ﻿
-
-//implicit conversion & explicit conversion
-//implicit (Automatic)
-byte b = 255;
-
-Int16 i = b;
-Int32 i1 = i;
-Int64 i2 = i1;//implicit from lower to higher
-//i = i1;//cannot convert from higher to lower
-
-
-//Explicit Method1
-i1 = (Int32)i2;
-i = (Int16)i1;
-b = (byte)i;
-//Method 2 using Predefined Functions called Methods
-i1 = Convert.ToInt32(i2);
-i = Convert.ToInt16(i1);
-b = Convert.ToByte(i);
-
-//from 1 to 1.0 or 2.1 to 2
-float f = i1;//converted implicitly
-i1 = (int)f;//to be converted explicitly
-i1 = Convert.ToInt32(f);//1.3 ->1 & 1.7 -> 2
-
-char c = '#';//Valued type & all the above are valued type variables
-int i3 = 'a';
-i3 = c;
-i1 = c;
-
-c = (char)i3;
-
-string str = "2";
-int i4 = Convert.ToInt32(str);
-
-str = Convert.ToString(i);
-str = i.ToString();
-str = 3.ToString();
-
-bool bl = Convert.ToBoolean("true");
-bl = Convert.ToBoolean("Truse");
-bl = Convert.ToBoolean("TRUE");
-
-str = bl.ToString();
-str = Convert.ToString(bl);
 //datatype.TryParse out keyword
+//out keyword is part of Reference (Address), ref is also a keyword that holds reference
+
+
+//tryParse
+using System.Collections.Immutable;
+
+string str = "2d";
+//int i = Convert.ToInt32(str);
+bool isSucceeded = Int32.TryParse(str, out int a);
+Console.WriteLine($"Is Succeeded : {isSucceeded}, and value is {a}");
+
+char c = 'A';
+a = (int)c;
+Console.WriteLine($"value is {a}");
+isSucceeded = Int32.TryParse(c.ToString(), out a);
+Console.WriteLine($"Is Succeeded : {isSucceeded}, and value is {a}");
+
+isSucceeded = bool.TryParse("TRUEE", out bool result);
+Console.WriteLine($"Is Succeeded : {isSucceeded}, and value is {result}");
+isSucceeded = double.TryParse("2..33", out double resultDouble);
+Console.WriteLine($"Is Succeeded : {isSucceeded}, and value is {resultDouble}");
+
+try
+{
+    Console.WriteLine("enter any number to convert into int");
+    a = Convert.ToInt32(Console.ReadLine());
+    isSucceeded = true;
+}
+catch (Exception ex)
+{
+    isSucceeded = false;
+    a = 0;
+}
+finally
+{
+    Console.WriteLine($"Is Succeeded : {isSucceeded}, and value is {a}");
+
+}
