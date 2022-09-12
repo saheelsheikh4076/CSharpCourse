@@ -1,39 +1,29 @@
-﻿
-//datatype.TryParse out keyword
-//out keyword is part of Reference (Address), ref is also a keyword that holds reference
-
-
-//tryParse
-using System.Collections.Immutable;
-
-string str = "2d";
-//int i = Convert.ToInt32(str);
-bool isSucceeded = Int32.TryParse(str, out int a);
-Console.WriteLine($"Is Succeeded : {isSucceeded}, and value is {a}");
-
-char c = 'A';
-a = (int)c;
-Console.WriteLine($"value is {a}");
-isSucceeded = Int32.TryParse(c.ToString(), out a);
-Console.WriteLine($"Is Succeeded : {isSucceeded}, and value is {a}");
-
-isSucceeded = bool.TryParse("TRUEE", out bool result);
-Console.WriteLine($"Is Succeeded : {isSucceeded}, and value is {result}");
-isSucceeded = double.TryParse("2..33", out double resultDouble);
-Console.WriteLine($"Is Succeeded : {isSucceeded}, and value is {resultDouble}");
-
-try
+﻿//Functions are now called as Methods
+//The are set of instructions
+//eg
+// it has name "Add", on left is return type. and on RHS in bracket(parameters)
+int Add(int a, int b)//here int is return type, and it has two parameters a & b (Arguments)
 {
-    Console.WriteLine("enter any number to convert into int");
-    a = Convert.ToInt32(Console.ReadLine());
-    isSucceeded = true;
+    int temp = a + b;
+    return temp;
 }
-catch (Exception ex)
+//int Add(int a, int b, int c)//Using Same Name of Functions, Function Overloading
+//{
+//    return a + b + c;
+//}
+
+int Mutiply(int a, int b)
 {
-    isSucceeded = false;
-    a = 0;
+    int temp = a * b;
+    return temp;
 }
-finally
+void Print(string Message)
 {
-    Console.WriteLine($"Is Succeeded : {isSucceeded}, and value is {a}");
+    Console.WriteLine(Message);
 }
+//Now calling function
+Print("This is my first program. made by Irfan sir");
+int result = Add(10, 20);
+Console.WriteLine($"Result of Addition is {result}");
+Console.WriteLine($"Result of Addition is {Add(1,2)}");//method 2 
+
