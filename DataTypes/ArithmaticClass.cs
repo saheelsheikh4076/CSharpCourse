@@ -4,6 +4,12 @@
     {
         public void Test()
         {
+            //To create a variabe of class type (OLD fashion)
+            //or to create a class instance
+            //or to create a class object
+            //or to instantiate a class 
+            //or to create a reference variable of a class
+
             ArithmaticClass arithmatic = new ArithmaticClass();
             Console.WriteLine(" --------->result of Addition <--------");
             int resultAdd = arithmatic.Addition(71, 72);
