@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataTypes
 {
+    /// <summary>
+    /// Class & Struct
+    /// 
+    /// </summary>
     public class StudentClass//The class next to namespace is called Type
     {
         ///Following are the class members
@@ -15,11 +19,19 @@ namespace DataTypes
         /// struct
         /// classes - > classes (nested classes)
         /// 
-
+        public void test()
+        {
+            //s.Name = "abcd";//set not allowed as it is private set
+            string tmp = "s.Name";//get
+            StudentClass.Mobile m = new StudentClass.Mobile();
+            m.ScreenSize = 6;
+            StudentClass.Bag b = new StudentClass.Bag();
+            b.BagSize = 5;
+        }
         public string FirstName { get; set; }
         private string FatherName;//Private Field
         public string Address { get; set; }
-        public string PhoneNo { get; set; }
+        public string Phone { get; set; }
         public string City { get; set; }
         public string Region { get; set; }
         public string Name { get; private set; }//Public Property

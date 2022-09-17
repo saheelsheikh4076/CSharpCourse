@@ -7,7 +7,7 @@
     /// </summary>
     public class LogicalOperators
     {
-        public void Test()
+        public void LogicalOperator()
         {
             LogicalOperators operators = new LogicalOperators();
             int a = 1, b = 1;

@@ -8,7 +8,7 @@ namespace DataTypes
 {
     public class AssignmentOperators
     {
-        public void Test()
+        public void AssignmentOperator()
         {
             AssignmentOperators operators = new AssignmentOperators();
             Console.WriteLine($"Result of as it is {operators.AssignAsItIs(14)}");
@@ -20,6 +20,8 @@ namespace DataTypes
             Console.WriteLine($"Result of Divide {operators.AssignAndDivideR(143, 243)}");
             Console.WriteLine($"Result of shiftLeft {operators.AssignAndShiftLeft(1, 1000)}");
             Console.WriteLine($"Result of ShiftRight {operators.AssignAndShiftRight(1, 0001)}");
+            
+
         }
         public int AssignAsItIs(int a)
         {
@@ -34,11 +36,13 @@ namespace DataTypes
         }
         public int AssignAndIncrement(int a, int b)
         {
+            //a = a + b
             a += b;
             return a;
         }
         public int AssignAndDecrement(int a, int b)
         {
+            //a = a - b
             a -= b;
             return a;
         }
@@ -65,7 +69,7 @@ namespace DataTypes
         {
             ///2 will be 0010
             ///if shifted right by 1 it becomes 0001 i.e. 1
-            ///if 2 (0010) is shifted left by 1 then it becomes 0100 i.e. 4
+            ///if 2 (0010) is shifted left by 1 then it becomes 100 i.e. 4
             ///if 2 (0010) is shifted left by 2 then it becomes 1000 i.e. 8
             ///
             a <<= b;
