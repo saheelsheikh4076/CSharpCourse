@@ -4,11 +4,9 @@
 //or to create a class object
 //or to instantiate a class 
 //or to create a reference variable of a class
-
-AssignmentOperators a = new AssignmentOperators();
-a.AssignAndIncrementByOne(12);
-a.AssignAndIncrement(12, 4);
-a.AssignAndDivideQ(10,3);
+//MathClass m = new MathClass();
+//m.TestMathClass();
+StringClass.Test();
 
 
 
