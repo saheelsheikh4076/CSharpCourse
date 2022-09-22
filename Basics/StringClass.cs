@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataTypes
+namespace Basics
 {
     public class StringClass
     {
@@ -15,7 +15,7 @@ namespace DataTypes
             Console.WriteLine($"Hello {s}");
             Console.WriteLine(s.Length);
             Console.WriteLine(s.IndexOf('o'));
-            string[] splitresult = s.Split('w');
+            string[] splitresult = s.Split('o');
             string date = "19-9-2022";
             string[] datesplit = date.Split('-');
             string ss = date.Substring(5, 4);

@@ -1,4 +1,4 @@
-﻿namespace DataTypes
+﻿namespace Basics
 {
     public class ArithmaticClass
     {

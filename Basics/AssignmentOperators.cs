@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataTypes
+namespace Basics//Assembly Name
 {
     public class AssignmentOperators
     {
