@@ -39,7 +39,7 @@ namespace Advance1
             }
             else if (a == 3)
             {
-                Console.WriteLine("You entered 3");
+                 Console.WriteLine("You entered 3");
 
             }
             else if(a == 4)
