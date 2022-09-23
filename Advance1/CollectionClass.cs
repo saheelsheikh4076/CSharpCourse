@@ -2,11 +2,11 @@
 {
     public class CollectionClass
     {
-        public static void Test()
+        public static void Test() 
         {
             //Declaration, allocate and assignemnt of value
             int[] a = { 1, 2, 3, 4, 5 };
-            string[] s = { "first", "second", "third" };
+            string[] s = { "first", "second", "third" }; 
             float[] f = { 1.2f, 2.2f, 3.3f, 4.2f, 5.0f };
             double[] d = { 1.1, 2.2, 3.3 };
             char[] c = { 'a', 'b', 'c' };
