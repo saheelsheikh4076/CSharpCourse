@@ -1,1 +1,16 @@
-1. 
+1.Basics,
+(1).ArithmaticClass.cs
+(2).AssignmentOperators.cs
+(3).DataTypes.cs
+(4).LogicalOprators.cs
+(5).MathClass.cs
+(6).MethodClass.cs
+(7).ParsingBetweenDataType.cs
+(8).StringClass.cs
+(9).StudentClass.cs
+(10).TryParseClass.cs
+2. Advance1,
+(1). AccessModifierClass.cs
+(2). CollectionClass.cs
+(3). Condition.cs
+(4).TestClass.cs
