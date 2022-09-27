@@ -9,6 +9,31 @@
     /// </summary>
     public class Loops
     {
+        public static void WhileLoopWithBreakAndContinue()
+        {
+            //break keyword is used to stop the loop / iteration - stop
+            //continue keyword is used to skip the current running iteration. skip and go ahead
+
+            int i = 0;
+            while (true)
+            {
+               i++;
+                        if(i>10) { break; }
+                i--;
+                i = i + 2;
+            }
+
+            i = 0;
+            while (true)
+            {
+                i++;
+                    if(i%2 == 0) { continue; }
+                Console.WriteLine(i);
+                i--;
+                i++;
+                if (i > 100) { break; }
+            }
+        }
         public static void TestLoopOn1DArray()
         {
             int[] arr = new int[] { 1, 4, 5, 7, 8, 3, 4, 10 };

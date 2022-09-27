@@ -5,8 +5,6 @@ using Basics;
 //c.SelectOptionByIf();
 
 
-//Loops.TestLoopOn1DArray();
-Conditions.ConditionByTernaryOperator();
-
+Calculator.TestCalculator();
 
 

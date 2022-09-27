@@ -5,12 +5,13 @@
         public static void Test()
         {
             //Valued Type variable/datatypes do not accept null
-            int i = 0;//Valued Type
+            int i = 0;//Valued Type byte, short, int, long
             //int j = null;//Non Nullable data type (does not accept null)
             int? k = null;
-            float? f = null;
+            float? f = null;//float, decimal, double
             bool? isPassed = null;
             bool? isMale = Convert.ToBoolean(null);
+            
             Console.WriteLine(isMale);
 
 
