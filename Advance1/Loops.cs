@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Advance1
+﻿namespace Advance1
 {
     /// <summary>
     /// Loops
@@ -17,7 +11,7 @@ namespace Advance1
     {
         public static void TestLoopOn1DArray()
         {
-            int[] arr = new int[] { 1, 4, 5, 7, 8, 3, 4 , 10};
+            int[] arr = new int[] { 1, 4, 5, 7, 8, 3, 4, 10 };
             for (int i = 0; i < arr.Length; i++)
             {
                 Console.WriteLine($"Value at {i} is {arr[i]}");
@@ -27,7 +21,7 @@ namespace Advance1
         {
             int[][] arr = new int[][]
             {
-                new int[]{1,2,3,4 }, 
+                new int[]{1,2,3,4 },
                 new int[]{5,6,7,8 },
                 new int[]{7,5,4,3}
             };
@@ -57,9 +51,9 @@ namespace Advance1
             //    Console.WriteLine("Infinite loop");
             //}
             int i = 0;
-            while (i < 10)
+            while (i <10 )
             {
-                Console.WriteLine($"Value is {++i}");
+                Console.WriteLine($"value is {i++}");
             }
         }
         public static void TestDoWhile()//UpperCamelCase lowerCamelCase (Pascal)
@@ -77,7 +71,7 @@ namespace Advance1
                 Console.WriteLine($"Value is {i}");
                 i++;
             }
-            while(i<10);
+            while (i < 10);
 
             //Special case: False condition will iterate once 
             do

@@ -24,10 +24,10 @@ namespace Advance1
                 Console.WriteLine("both strings are different");
             }
         }
-        public void SelectOptionByIf()
+        public static void SelectOptionByIf()
         {
             //Select options with if can be performed with If Else Ladder
-            Console.WriteLine("Enter 1 or 2 or 3 or 4");
+            Console.WriteLine("Enter 1 or 2 or 3 or 4 or 5");
             int a = Convert.ToInt32(Console.ReadLine());
             if(a == 1)
             {
@@ -46,6 +46,11 @@ namespace Advance1
             {
                 Console.WriteLine("You entered 4");
             }
+            else if(a == 5)
+            {
+                Console.WriteLine("You entered 5");
+            }
+
             else
             {
                 Console.WriteLine("You entered incorrect value");
@@ -64,6 +69,14 @@ namespace Advance1
                 case 4: Console.WriteLine("You entered 4"); break;
                 default: Console.WriteLine("You entered incorrect value");break;
             }
+        }
+
+        public static void ConditionByTernaryOperator()
+        {
+            int a = 10;
+            int b = 11;
+            Console.WriteLine(a == 10 ? "Yes" : "No");
+            Console.WriteLine(a == 10 ? (b == 11? "yes ok":" yes not ok") : "no" );
         }
     }
 }

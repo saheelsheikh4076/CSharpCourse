@@ -42,7 +42,8 @@
                 new int[]{5,6,7,8}, // base index 1
                 new int[]{3,2,1,6} //base index 2
             };
-            Console.WriteLine(a3[2][0]);
+            Console.WriteLine(a3[2][3]);
+            
 
 
             int[][][] a4 = new int[][][]

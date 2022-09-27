@@ -1,10 +1,12 @@
 ﻿using Advance1;
+using Basics;
 
 //Conditions c = new Conditions();
 //c.SelectOptionByIf();
 
 
-Loops.TestLoopOn2DArray();
+//Loops.TestLoopOn1DArray();
+Conditions.ConditionByTernaryOperator();
 
 
 
