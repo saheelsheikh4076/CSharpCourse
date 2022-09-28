@@ -2,8 +2,24 @@
 {
     public class ArithmaticClass
     {
+        public class AddClass
+        {
+            public int Result { get; set; }
+            public AddClass(int a, int b)
+            {
+                Result = a + b;
+            }
+            public AddClass(int a, int b, int c)
+            {
+                Result = a + b + c;
+            }
+        }
         public void Test()
         {
+            AddClass a = new AddClass(20, 22);
+            Console.WriteLine(a.Result);
+            AddClass a1 = new AddClass(20, 22, 24);
+            Console.WriteLine(a1.Result);
             //To create a variabe of class type (OLD fashion)
             //or to create a class instance
             //or to create a class object
