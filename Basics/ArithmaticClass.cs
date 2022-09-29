@@ -52,12 +52,12 @@
             Console.WriteLine($"result of division-> Remainder is {r} and Quotient is {q}");
             Console.WriteLine($"Result of Increment is {arithmatic.Increment(12)}");
             Console.WriteLine($"Result of Decrement is {arithmatic.Decrement(12)}");
-            int a = 12;
-            Console.WriteLine($"Value in a {a}");//12
-            Console.WriteLine($"Value in a {a++}");//12->13
-            Console.WriteLine($"Value in a {++a}");//14
-            Console.WriteLine($"Value in a {--a}");//13
-            Console.WriteLine($"Value in a {a--}");//13
+            int i= 12;
+            Console.WriteLine($"Value in a {i}");//12
+            Console.WriteLine($"Value in a {i++}");//12->13
+            Console.WriteLine($"Value in a {++i}");//14
+            Console.WriteLine($"Value in a {--i}");//13
+            Console.WriteLine($"Value in a {i--}");//13
         }
         /// <summary>
         /// Arithmatic Operators
@@ -106,13 +106,13 @@
             int r = a % b;
             return (q, r);
         }
-        public int Increment(int a)
+        public int Increment(int i)
         {
-            return ++a;
+            return ++i;
         }
-        public int Decrement(int a)
+        public int Decrement(int i)
         {
-            return --a;
+            return --i;
         }
     }
 }
