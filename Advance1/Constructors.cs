@@ -34,6 +34,6 @@ namespace Advance1
         {
             result = (a + b) * c;
         }
-            
+         
     }
 }

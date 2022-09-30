@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Basics
+﻿namespace Basics
 {
     internal class MethodClass
     {
@@ -46,7 +40,7 @@ namespace Basics
             Console.WriteLine(Message);
         }
         //Now calling function
-       public void Test()
+        public void Test()
         {
             Print("This is my first program. made by Irfan sir");
             double result = Add(71.5, 71.5);
@@ -54,7 +48,7 @@ namespace Basics
             Console.WriteLine($"Result of Addition is {result}");//method 1 
             Console.WriteLine($"result of substraction is {346 - 203}");
             Console.WriteLine($"Result of Multiply is {11 * 13}");//method 2
-            Console.WriteLine($"result of divide is {result}");
+            Console.WriteLine($"result of divide is {result1}");
         }
 
 

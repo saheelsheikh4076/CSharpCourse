@@ -18,6 +18,8 @@ namespace Advance1
                 Console.Clear();
                 Console.WriteLine("Welcome to calculator!");
                 Console.WriteLine("Select an operation");
+                Console.WriteLine(ConstantVariables.Counter);
+                Console.WriteLine(ConstantVariables.StopTime - ConstantVariables.StartTime);
                 Console.WriteLine("1. Addition \n2. Subtraction \n3. Multiplication \n4. Division \n Press any other key to exit.");
                 char input = Console.ReadKey().KeyChar;
                 int a; int b; int result;
