@@ -1,9 +1,4 @@
 ﻿using Basics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Advance1
 {
@@ -12,8 +7,8 @@ namespace Advance1
         public static void TestCalculator()
         {
             ArithmaticClass arith = new ArithmaticClass();
-            
-            while(true)
+
+            while (true)
             {
                 Console.Clear();
                 Console.WriteLine("Welcome to calculator!");
@@ -31,7 +26,7 @@ namespace Advance1
                         a = Convert.ToInt32(Console.ReadLine());
                         b = Convert.ToInt32(Console.ReadLine());
                         result = arith.Addition(a, b);
-                        Console.WriteLine("Result of Addition is {0} \nPress any key to continue",result);
+                        Console.WriteLine("Result of Addition is {0} \nPress any key to continue", result);
                         Console.ReadKey();
                         break;
                     case '2':
@@ -58,7 +53,7 @@ namespace Advance1
                         a = Convert.ToInt32(Console.ReadLine());
                         b = Convert.ToInt32(Console.ReadLine());
                         (int q, int r) = arith.Divide(a, b);
-                        Console.WriteLine("Result of Division is Q = {0} & R = {1} \nPress any key to continue", q,r);
+                        Console.WriteLine("Result of Division is Q = {0} & R = {1} \nPress any key to continue", q, r);
                         Console.ReadKey();
                         break;
                     default:
