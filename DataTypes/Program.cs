@@ -1,8 +1,6 @@
-﻿using Advance1;
-using Basics;
+﻿
 
-//Console.WriteLine(ConstantVariables.Counter);
-//DestructorClass d = new DestructorClass();
-//Console.WriteLine(ConstantVariables.Counter);
-//Calculator.TestCalculator();
-DateTimeClass.Test();
+using OOPS;
+
+Inheritance1 i = new Inheritance1();
+i.Test();

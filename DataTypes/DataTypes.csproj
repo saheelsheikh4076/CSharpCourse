@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Advance1\Advance1.csproj" />
     <ProjectReference Include="..\Basics\Basics.csproj" />
+    <ProjectReference Include="..\OOPS\OOPS.csproj" />
   </ItemGroup>
 
 </Project>
