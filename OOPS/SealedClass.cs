@@ -20,7 +20,7 @@ namespace OOPS
             public int MyProperty { get; set; }
             public int MyProperty1 { get; set; }
         }
-        //public class TestClass1:TestClass
+        //public class TestClass1 : TestClass
         //{
 
         //}
