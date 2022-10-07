@@ -5,12 +5,10 @@ namespace DataTypes//Assembly
 {
     public class Program
     {
-        public static void main()
+        public static void Main()
         {
-            PublicClass publicClass = new PublicClass();publicClass.Name = "hello";
-            //InternalClass internalClass = new InternalClass();
-            //ProtectedClass protectedClass = new ProtectedClass();
-            //PrivateClass privateClass = new PrivateClass();
+            Overriding o = new();
+            o.Test();
         }
     }
 

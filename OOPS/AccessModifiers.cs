@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static OOPS.AccessModifiers;
+﻿using static OOPS.AccessModifiers;
 
 namespace OOPS//Assembly
 {
@@ -32,15 +27,15 @@ namespace OOPS//Assembly
             ProtectedClass protectedClass = new ProtectedClass();
             PrivateClass privateClass = new PrivateClass();
         }
-        public class PublicClass//type/class
+        public class PublicClass //type/class
         {
             public string Name { get; set; }//member
         }
-        internal class InternalClass
+        internal class InternalClass 
         {
             public string Name { get; set; }
         }
-        protected class ProtectedClass
+        protected class ProtectedClass 
         {
             public void Test()
             {
@@ -55,14 +50,14 @@ namespace OOPS//Assembly
                 ProtectedClass publicClass = new ProtectedClass();
             }
         }
-        private class ProtectedClass2: ProtectedClass
+        private class ProtectedClass2 : ProtectedClass
         {
             public void Test()
             {
                 ProtectedClass publicClass = new ProtectedClass();
             }
         }
-        private class PrivateClass
+        private class PrivateClass 
         {
             public string Name { get; set; }
         }
