@@ -8,9 +8,18 @@
 (7).ParsingBetweenDataType.cs
 (8).StringClass.cs
 (9).StudentClass.cs
-(10).TryParseClass.cs
+(10).TryParseClass.cs   
+
+
 2. Advance1,
 (1). AccessModifierClass.cs
 (2). CollectionClass.cs
 (3). Condition.cs
-(4).TestClass.cs
+(4). TestClass.cs
+(5). Calculator.cs
+(6). Constantvariables.cs
+(7). Constructor.cs
+(8). Distructor.cs
+(9). DateTimeClass.cs
+(10). Loops.cs
+(11). PropertyOfClass.cs

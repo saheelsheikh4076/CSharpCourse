@@ -1,14 +1,13 @@
 ﻿
-using OOPS;
-using static OOPS.AccessModifiers;
+using Asynchronous;
 namespace DataTypes//Assembly
 {
     public class Program
     {
         public static void Main()
         {
-            Overriding o = new();
-            o.Test();
+            AsynchronousClass a = new AsynchronousClass();
+            a.Test();
         }
     }
 
