@@ -13,7 +13,6 @@
             Task T5 = new Task(Task5);
           
             
-            // Synchronous threading 
             T3.Start();
             T1.Start();
             T2.Start();
@@ -22,6 +21,7 @@
             
             Task.WaitAll(T1,T2,T3,T4,T5);
 
+            // Synchronous threading 
             Task1();
             Task2();
             Task3();

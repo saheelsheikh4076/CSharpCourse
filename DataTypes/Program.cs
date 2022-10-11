@@ -1,13 +1,15 @@
 ﻿
 using Asynchronous;
+using OOPS;
+
 namespace DataTypes//Assembly
 {
     public class Program
     {
         public static void Main()
         {
-            AsynchronousClass a = new AsynchronousClass();
-            a.Test();
+            DelegateClass2 a = new DelegateClass2();
+            a.Test1();
         }
     }
 
