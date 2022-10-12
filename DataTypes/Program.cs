@@ -8,8 +8,8 @@ namespace DataTypes//Assembly
     {
         public static void Main()
         {
-            DelegateClass2 a = new DelegateClass2();
-            a.Test1();
+            DelegateClass aa = new DelegateClass();
+            aa.Test();
         }
     }
 

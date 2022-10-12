@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OOPS
+﻿namespace OOPS
 {
     public class DelegateClass
     {
@@ -21,12 +15,13 @@ namespace OOPS
         //signature of deletage is that its return type is void and it takes a int parameter
         public void Test()
         {
+            
             //Create an instance of delegate
             MyDelegate addDelegate = new MyDelegate(Add);
             addDelegate.Invoke(10);//invoke means start
             Add(10);
             DelegateClass2 class2 = new DelegateClass2();
-            class2.Test(Add1);
+            class2.Test(Add);
         }
         public void Add1(int abc)
         {
@@ -43,7 +38,7 @@ namespace OOPS
         public delegate void AddDelegate(int a);
         public void Test(AddDelegate addFunction)
         {
-            addFunction(15);//Call back function
+            addFunction(15);//Call back function.. here we are invoking the delegate
             addFunction(15);//Call back function
             addFunction(15);//Call back function
             addFunction(15);//Call back function
@@ -63,6 +58,58 @@ namespace OOPS
             c.Add1(10);
             c.Add1(10);
             c.Add1(10);
+        }
+    }
+
+    public class DelegateTest
+    {
+        public delegate int AddDelegate(int a,int b);//Defination
+        public void Test(AddDelegate addDelegate)
+        {
+            //AddDelegate d = new AddDelegate(TargetFunction);
+            //int result = d.Invoke(10, 20);
+
+            //--------------------------------
+            int result2 = addDelegate(10, 20);
+            result2 = addDelegate(10, 20);
+            result2 = addDelegate(10, 20);
+            result2 = addDelegate(10, 20);
+            result2 = addDelegate(10, 20);
+            result2 = addDelegate(10, 20);
+            result2 = addDelegate(10, 20);
+            result2 = addDelegate(10, 20);
+        }
+        //-------------------------------------------------------
+        public void CallerFunction()
+        {
+            Test(AddFunction);
+            Test(TargetFunction);
+            Test(SubtractFunction);
+        }
+        public int TargetFunction(int first, int second)
+        {
+            return first + second;
+        }
+        public int AddFunction(int first, int second)
+        {
+            return first + second;
+        }
+        public int SubtractFunction(int first, int second)
+        {
+            return first - second;
+        }
+    }
+
+    public class InbuildDelegates
+    {
+        public int Function1()
+        {
+            return 10;
+        }
+        public void Test()
+        {
+           //Dependent on Generics 
+         //Action, Predicate, Func   
         }
     }
 }
