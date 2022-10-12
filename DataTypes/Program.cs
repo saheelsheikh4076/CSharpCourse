@@ -1,17 +1,4 @@
-﻿
-using Asynchronous;
-using OOPS;
+﻿using Basics;
 
-namespace DataTypes//Assembly
-{
-    public class Program
-    {
-        public static void Main()
-        {
-            DelegateClass aa = new DelegateClass();
-            aa.Test();
-        }
-    }
-
-}
-
+OutRef o = new OutRef();
+o.TestOut();
