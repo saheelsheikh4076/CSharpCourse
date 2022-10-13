@@ -1,4 +1,4 @@
-﻿namespace Advance1
+﻿namespace Advance
 {
     public class CollectionClass
     {

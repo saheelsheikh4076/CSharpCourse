@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTypes", "DataTypes\DataTypes.csproj", "{B61B6125-3551-4569-9543-FD178B995375}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainProject", "DataTypes\MainProject.csproj", "{B61B6125-3551-4569-9543-FD178B995375}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Advance1", "Advance1\Advance1.csproj", "{CB2C6D61-17F4-43CA-B6FF-4C1114DAA956}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Advance", "Advance1\Advance.csproj", "{CB2C6D61-17F4-43CA-B6FF-4C1114DAA956}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basics", "Basics\Basics.csproj", "{5CCD4C5F-10FF-4C95-A959-CC4E84D59740}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOPS", "OOPS\OOPS.csproj", "{B09F207D-6A53-44A5-A73D-3DD7B599665B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asynchronous", "Asynchronous\Asynchronous.csproj", "{EB8DE167-4CDC-4AC8-8EB7-D8395AC7BFB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asynchronous", "Asynchronous\Asynchronous.csproj", "{EB8DE167-4CDC-4AC8-8EB7-D8395AC7BFB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

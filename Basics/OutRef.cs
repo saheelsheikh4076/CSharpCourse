@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Basics
+﻿namespace Basics
 {
     public class OutRef
     {
@@ -14,7 +8,7 @@ namespace Basics
             //Call by reference/Address
             //Call by Value
             int x = 0;
-            AddRef(10,20, ref x);//Here ref variable must be initialized
+            AddRef(10, 20, ref x);//Here ref variable must be initialized
             Console.WriteLine(x);
         }
         public void AddRef(int a, int b, ref int result)
@@ -27,7 +21,7 @@ namespace Basics
         public void TestOut()
         {
             int x;
-            AddOut(10,20,out x);//here out variable/pointer has no need to initialize
+            AddOut(10, 20, out x);//here out variable/pointer has no need to initialize
             AddOut(10, 20, out int y);
             Console.WriteLine($"X={x} and Y = {y}");
         }

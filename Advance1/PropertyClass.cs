@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Advance1
+namespace Advance
 {
     public class PropertyClass
     {

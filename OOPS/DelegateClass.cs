@@ -1,6 +1,14 @@
 ﻿namespace OOPS
 {
-    public class DelegateClass
+    public partial class DelegateClass
+    {
+        public void TestFunc()
+        {
+            
+        }
+    }
+
+    public partial class DelegateClass
     {
         //A pointer holds address and points to the location
         //a delegate is a pointer to a function
@@ -13,7 +21,7 @@
         //fourth is the name of delegate 'MyDelegate'
         //fifth is parameters or arguments (int a) parameter
         //signature of deletage is that its return type is void and it takes a int parameter
-        public void Test()
+        public virtual void Test()
         {
             
             //Create an instance of delegate
@@ -58,6 +66,7 @@
             c.Add1(10);
             c.Add1(10);
             c.Add1(10);
+    
         }
     }
 
@@ -78,6 +87,8 @@
             result2 = addDelegate(10, 20);
             result2 = addDelegate(10, 20);
             result2 = addDelegate(10, 20);
+            
+            Console.WriteLine($"{result2 }");
         }
         //-------------------------------------------------------
         public void CallerFunction()
@@ -88,12 +99,13 @@
         }
         public int TargetFunction(int first, int second)
         {
-            return first + second;
+            return first * second;
         }
         public int AddFunction(int first, int second)
         {
             return first + second;
         }
+           
         public int SubtractFunction(int first, int second)
         {
             return first - second;
@@ -108,8 +120,8 @@
         }
         public void Test()
         {
-           //Dependent on Generics 
-         //Action, Predicate, Func   
+            //Dependent on Generics 
+            //Action, Predicate, Func   
         }
     }
 }

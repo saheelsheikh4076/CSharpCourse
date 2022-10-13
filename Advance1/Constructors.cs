@@ -1,6 +1,6 @@
 ﻿using Basics;
 
-namespace Advance1
+namespace Advance
 {
     public class Constructors
     {
