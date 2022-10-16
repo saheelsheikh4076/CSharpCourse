@@ -9,6 +9,8 @@
 (8).StringClass.cs
 (9).StudentClass.cs
 (10).TryParseClass.cs   
+(11).NullableDataType.cs
+(12).OutRef.cs
 
 
 2. Advance1,
@@ -23,3 +25,20 @@
 (9). DateTimeClass.cs
 (10). Loops.cs
 (11). PropertyOfClass.cs
+(12). GenericClass.cs
+(13). ListClass.cs
+
+
+3. Asynchronous.
+(1). Class.cs
+
+
+
+4. Oops.
+(1). Accessmodifiers.cs
+(2). DelegateClass.cs
+(3). IncompleteClass.cs
+(4). Inheritance.cs
+(5). Overriding.cs
+(6). privateConstructor.cs
+(7). SealedClass.cs
