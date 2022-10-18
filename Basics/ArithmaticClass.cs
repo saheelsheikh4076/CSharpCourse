@@ -33,7 +33,7 @@
             int resultAdd1 = arithmatic.Addition(50, 45, 48);
 
             Console.WriteLine($"Result of addition is {resultAdd}");//string interpolation
-            Console.WriteLine($"Result of Addition is {resultAdd}");//string interpolation
+            Console.WriteLine($"Result of Addition is {resultAdd1}");//string interpolation
             Console.WriteLine($"Result of Addition is {arithmatic.Addition(45, 45, 45, 8)}");
 
             Console.WriteLine("-------->result of substract<---------");
