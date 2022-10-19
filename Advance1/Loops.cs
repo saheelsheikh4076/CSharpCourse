@@ -9,6 +9,31 @@
     /// </summary>
     public class Loops
     {
+        public void TestForEach()
+        {
+            List<int> rollNos = new List<int>() { 1, 2, 3, 4, 5, 6, 7 };
+            foreach (int rollNo in rollNos)
+            {
+                Console.WriteLine(rollNo);
+            }
+            int[] rollArray = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+            foreach (var item in rollArray)
+            {
+                Console.WriteLine($"Roll No in Array {item}");
+            }
+            foreach (var item in "Hello world")
+            {
+                Console.WriteLine($"Character : {item}");
+            }
+        }
+        public void TestForLoopOnString()
+        {
+            string str = "Hello world";
+            for (int i = 0; i < str.Length; i++)
+            {
+                Console.WriteLine($"Character : {str[i]}");
+            }
+        }
         public static void WhileLoopWithBreakAndContinue()
         {
             //break keyword is used to stop the loop / iteration - stop

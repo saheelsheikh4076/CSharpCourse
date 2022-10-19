@@ -1,6 +1,3 @@
-﻿
-using Advance;
+﻿using OOPS;
 
-ListClass c = new ListClass();
-c.TestComplexList();
-//new ForEachClass().Test();
+new MultiDelegates().Test();

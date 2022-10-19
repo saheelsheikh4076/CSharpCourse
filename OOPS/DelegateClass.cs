@@ -114,14 +114,72 @@
 
     public class InbuildDelegates
     {
-        public int Function1()
+        public void Function1(int a)
         {
-            return 10;
+            Console.WriteLine($"Action Delegate is invoked and value received is {a}");
         }
+        public int Function2(int a, int b, int c)
+        {
+            return Math.Abs(a) + Math.Abs(b) + Math.Abs(c);
+        }
+        public bool Function3(int a)
+        {
+            return a > 10;
+        }
+        public void TestActionDelegate()
+        {
+            Action<int> actDelegate = Function1;
+            Action<int> actDelegate1 = new Action<int>(Function1);
+            actDelegate.Invoke(10);
+        }
+        public void TestFuncDelegate()
+        {
+            Func<int, int, int, int> funcDel = Function2;
+            Func<int, int, int, int> funcDel1 = new Func<int, int, int, int>(Function2);
+            Func<int, bool> funcAsPredicate = Function3;
+            Console.WriteLine($"Result of Func As Predicate is {funcAsPredicate.Invoke(11)}"); ;
+            int result = funcDel.Invoke(10, 30, -40);
+            Console.WriteLine($"Result of Func Delegate is Received as {result}");
+        }
+        public void TestPredicateDelegate()
+        {
+            Predicate<int> predDel = Function3;
+            Predicate<int> predDel1 = new Predicate<int>(Function3);
+            bool result = predDel.Invoke(9);
+            Console.WriteLine($"Result of predicate delegate is {result}");
+        }
+
+
+    }
+
+    public class MultiDelegates
+    {
+        public void Function1(int a)
+        {
+            Console.WriteLine("Function 1 invoked");
+        }
+        public void Function2(int a)
+        {
+            Console.WriteLine("Function 2 invoked");
+        }
+        public void Function3(int a)
+        {
+            Console.WriteLine("Function 3 invoked");
+        }
+        public void Function4(int b)
+        {
+            Console.WriteLine("Function 4 invoked");
+        }
+
         public void Test()
         {
-            //Dependent on Generics 
-            //Action, Predicate, Func   
+            Action<int> actDel = Function1;//Subscribe an event of function1
+            actDel += Function2;//subscribe function 2
+            actDel += Function3;
+            actDel += Function4;
+            actDel -= Function2;//unsubscribe function 3
+
+            actDel.Invoke(10);
         }
     }
 }
