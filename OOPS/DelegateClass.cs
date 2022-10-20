@@ -94,8 +94,11 @@
         public void CallerFunction()
         {
             Test(AddFunction);
+            Test((a, b) => { return a+b; });
             Test(TargetFunction);
+            Test((a, b) => { return a * b; });
             Test(SubtractFunction);
+            Test((a, b) => { return a - b; });
         }
         public int TargetFunction(int first, int second)
         {
@@ -137,7 +140,7 @@
             Func<int, int, int, int> funcDel = Function2;
             Func<int, int, int, int> funcDel1 = new Func<int, int, int, int>(Function2);
             Func<int, bool> funcAsPredicate = Function3;
-            Console.WriteLine($"Result of Func As Predicate is {funcAsPredicate.Invoke(11)}"); ;
+            Console.WriteLine($"Result of Func As Predicate is {funcAsPredicate.Invoke(11)}");
             int result = funcDel.Invoke(10, 30, -40);
             Console.WriteLine($"Result of Func Delegate is Received as {result}");
         }
@@ -180,6 +183,67 @@
             actDel -= Function2;//unsubscribe function 3
 
             actDel.Invoke(10);
+        }
+
+
+    }
+
+    public class DelegateWithLambda
+    {
+        public delegate void LambdaDelegate(int a);
+        public void Test()
+        {
+            DoSomething((a) => Console.WriteLine($"Do something is called with value {a}"));
+        }
+
+        public void DoSomething(LambdaDelegate l)
+        {
+            l(10);
+        }
+        //create a function that will filter numbers from list and return filtered list
+        public void TestFilter()
+        {
+            List<int> list = new List<int>() { 1, 2, 20, 30, 15, 9, 7, 50 };
+            
+            foreach (var item in GreaterThan10(list))
+            {
+                Console.WriteLine($"GreaterThan10 Result {item}");
+            }
+
+            foreach (var item in Filter(list, (a) => { return a > 7; }))
+            {
+                Console.WriteLine($"Filter Result {item}");
+            }
+            foreach (var item in Filter(list, (a) => { return a < 20; }))
+            {
+                Console.WriteLine($"Filter Result {item}");
+            }
+        }
+        
+        public delegate bool FilterDelegate(int a);
+        public List<int> GreaterThan10(List<int> list)
+        {
+            List<int> result = new List<int>();
+            foreach (var item in list)
+            {
+                if(item>10)
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
+        }
+        public List<int> Filter(List<int> list, FilterDelegate filter)
+        {
+            List<int> result = new List<int>();
+            foreach (var item in list)
+            {
+                if (filter(item))
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
         }
     }
 }

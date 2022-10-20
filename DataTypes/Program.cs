@@ -1,3 +1,3 @@
 ﻿using OOPS;
 
-new MultiDelegates().Test();
+new DelegateWithLambda().TestFilter();
