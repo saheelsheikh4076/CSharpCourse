@@ -209,7 +209,7 @@
             {
                 Console.WriteLine($"GreaterThan10 Result {item}");
             }
-
+              
             foreach (var item in Filter(list, (a) => { return a > 7; }))
             {
                 Console.WriteLine($"Filter Result {item}");
@@ -238,12 +238,42 @@
             List<int> result = new List<int>();
             foreach (var item in list)
             {
-                if (filter(item))
+                if (filter(item))//(a) => { return a > 7; }
                 {
                     result.Add(item);
                 }
             }
             return result;
         }
+
+
+
+        //+++++++++++ARITHMATIC+++++++++++++++++++++++
+        public void TestArithmatic()
+        {
+           var addition = ArithmaticOperation(10, 20, (a, b) => { return a + b; });
+           var multiplication = ArithmaticOperation(10, 20, (a, b) => { return a * b; });
+           var division = ArithmaticOperation(10, 20, (a, b) => { return a / b; });
+           var substraction = ArithmaticOperation(10, 20, (a, b) => { return a - b; });
+            Console.WriteLine("Result is {0}",addition);
+        }
+        public delegate int ArithmaticDelegate(int a, int b);
+        public int ArithmaticOperation(int a, int b, ArithmaticDelegate arithmatic)
+        {
+           return arithmatic(a, b);
+        }
+
+        //+++++++++++++++++++++++++++++++++++++++++++
+        //Create a function that returns a list of random integers
+        //Pass that list to another function that will order it in ascending
+        public List<int> GetAListofInt()
+        {
+            List<int> list = new List<int>()
+            {
+                11,2,5,2,9,4,10,40,25,17
+            };
+            return list;
+        }
+        
     }
 }

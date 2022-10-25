@@ -1,0 +1,22 @@
+JSON (for keeping system settings)
+Key value pair
+{
+	"a":10,
+	"b":20,
+	"student":{
+		"name":"Irfan",
+		"class":10,
+		"age":15,
+		"academics":{
+			"physics":77,
+			"chem":78,
+			"maths":80
+		}
+	},
+	"myapp":{
+		"framework":".net6",
+		"version":1.1
+	}
+}
+
+

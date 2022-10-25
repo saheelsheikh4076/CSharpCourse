@@ -1,0 +1,21 @@
+XML (for keeping system settings)
+Key value pair
+
+<a>10</a>
+<b>20</b>
+
+<student rollno="10">
+	<name case="upper">Irfan</name>
+	<class>10</class>
+	<age>15</age>
+	<academics>
+		<physics>77</physics>
+		<chem>78</chem>
+		<maths>80</maths>
+	</academics>
+</student>
+
+<myapp sdk="microsoft.aspnetcore.app">
+	<framework>.net6</framework>
+	<version>1.1</version>
+</myapp>
