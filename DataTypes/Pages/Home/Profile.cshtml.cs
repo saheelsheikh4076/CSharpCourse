@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MainProject.Pages.Home
 {
-    public class ContactModel : PageModel
+    public class ProfileModel : PageModel
     {
         private readonly NewTestClass test1;
-        public ContactModel(NewTestClass test)
+        public ProfileModel(NewTestClass test)
         {
             test1 = test;
         }

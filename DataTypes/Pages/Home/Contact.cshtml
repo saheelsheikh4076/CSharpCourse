@@ -1,9 +1,12 @@
 ﻿@page
+@using MainProject.Models
 @model MainProject.Pages.Home.ContactModel
+@inject NewTestClass test
 @{
-   
+    test.Id++;
 }
-
+<h1>Contact Page</h1>
+<h1>Id value is @test.Id</h1>
     <ul>
         <li>Name: Irfan Sir</li>
         <li>Address: Nagpur</li>

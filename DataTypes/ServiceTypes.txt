@@ -1,0 +1,7 @@
+Singleton - An instance that serve all the requests till app lifecycle.
+Scoped - An instance that serve all the requests within a scope
+Transient - for every new request a new instance is created
+
+Singleton - Least memory usage and largest delay / time
+Scoped - Average memory usage and average time
+Transient - Largest memory usage and least delay / time

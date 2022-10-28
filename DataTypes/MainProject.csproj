@@ -11,6 +11,7 @@
     <ProjectReference Include="..\Advance1\Advance.csproj" />
     <ProjectReference Include="..\Asynchronous\Asynchronous.csproj" />
     <ProjectReference Include="..\Basics\Basics.csproj" />
+    <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\OOPS\OOPS.csproj" />
   </ItemGroup>
 

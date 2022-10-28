@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOPS", "OOPS\OOPS.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asynchronous", "Asynchronous\Asynchronous.csproj", "{EB8DE167-4CDC-4AC8-8EB7-D8395AC7BFB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{921E633A-F47D-4CA3-B7F4-54B60DC7FCA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{EB8DE167-4CDC-4AC8-8EB7-D8395AC7BFB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB8DE167-4CDC-4AC8-8EB7-D8395AC7BFB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB8DE167-4CDC-4AC8-8EB7-D8395AC7BFB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{921E633A-F47D-4CA3-B7F4-54B60DC7FCA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{921E633A-F47D-4CA3-B7F4-54B60DC7FCA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{921E633A-F47D-4CA3-B7F4-54B60DC7FCA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{921E633A-F47D-4CA3-B7F4-54B60DC7FCA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
