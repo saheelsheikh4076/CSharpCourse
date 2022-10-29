@@ -1,0 +1,22 @@
+﻿@page
+@using Services
+@model MainProject.Pages.RollList.RollListModel
+@inject IRollList rollList
+@{
+}
+
+
+
+@if(rollList.GetCount()>0)
+{
+    <ol>
+        @foreach (var item in rollList.GetAll())
+        {
+            <li>@item</li>
+        }
+    </ol>
+}
+else
+{
+    <h2>No Record found</h2>
+}
