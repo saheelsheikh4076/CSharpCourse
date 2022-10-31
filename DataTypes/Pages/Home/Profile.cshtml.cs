@@ -1,18 +1,26 @@
 using MainProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Services;
 
 namespace MainProject.Pages.Home
 {
     public class ProfileModel : PageModel
     {
-        private readonly NewTestClass test1;
-        public ProfileModel(NewTestClass test)
+        private readonly IRollList rollList;
+
+        [BindProperty]
+        public int RollNo { get; set; }
+        public ProfileModel(IRollList rollList)
         {
-            test1 = test;
+            this.rollList = rollList;
         }
         public void OnGet()
         {
+        }
+        public void OnPost()
+        {
+            rollList.Delete(RollNo);
         }
     }
 }

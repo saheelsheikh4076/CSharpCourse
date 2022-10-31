@@ -5,6 +5,11 @@
 @{
 }
 
+<form method="post">
+    <label asp-for="RollNo">Roll No</label>
+    <input asp-for="RollNo" />
+    <button type="submit">Add</button>
+</form>
 
 
 @if(rollList.GetCount()>0)

@@ -1,7 +1,17 @@
 ﻿@page
 @using MainProject.Models
+@using Services
 @model MainProject.Pages.Home.ProfileModel
 @inject NewTestClass testFE
+@inject IRollList rollList
 @{
 }
 <h1>Profile Page</h1>
+<form method="post">
+    <label asp-for="RollNo">Roll No</label>
+    <input asp-for="RollNo" />
+    <button type="submit">Delete</button>
+</form>
+@foreach(var rollNo in rollList.GetAll()){
+    <h3>@rollNo</h3>
+}

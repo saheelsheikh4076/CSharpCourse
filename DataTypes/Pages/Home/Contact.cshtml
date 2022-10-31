@@ -1,10 +1,13 @@
 ﻿@page
 @using MainProject.Models
+@using Services
 @model MainProject.Pages.Home.ContactModel
 @inject NewTestClass test
+@inject IRollList rollList
 @{
     test.Id++;
 }
+
 <h1>Contact Page</h1>
 <h1>Id value is @test.Id</h1>
     <ul>
@@ -12,3 +15,5 @@
         <li>Address: Nagpur</li>
         <li>Contact: 7768989727</li>
     </ul>
+
+    <h1>Total Students = @rollList.GetCount()</h1>
