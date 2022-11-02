@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder();
 
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<NewTestClass>();
-builder.Services.AddSingleton<IRollList, RollList>();
+builder.Services.AddTransient<IRollList, RollList>();
 //Transient service creates new instance for every request
 var app = builder.Build();
 //Following code is a pipeline

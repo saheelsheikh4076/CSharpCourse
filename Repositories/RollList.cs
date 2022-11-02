@@ -50,7 +50,7 @@ namespace Repositories
 
         public List<int> GetAll()
         {
-            return _RollList;
+            return _RollList.OrderBy(s=>s).ToList();
         }
 
         public int GetCount()

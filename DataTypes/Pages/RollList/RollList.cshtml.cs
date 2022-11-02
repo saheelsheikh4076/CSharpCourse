@@ -20,6 +20,7 @@ namespace MainProject.Pages.RollList
         public void OnPost()
         {
             rollList.Add(RollNo);
+            ModelState.Clear();
         }
     }
 }
