@@ -13,15 +13,15 @@
             Task T5 = new Task(Task5);
           
             
-            T3.Start();
-            T1.Start();
-            T2.Start();
-            T4.Start();
-            T5.Start();
+            T1.Start();//Thread1
+            T3.Start();//Thread2
+            T2.Start();//Thread3
+            T4.Start();//Thread4
+            T5.Start();//Thread5
             
-            Task.WaitAll(T1,T2,T3,T4,T5);
+            Task.WaitAll(T1,T2,T3,T4,T5);//STOP
 
-            // Synchronous threading 
+            // Synchronous threading runs on UI Thread
             Task1();
             Task2();
             Task3();
