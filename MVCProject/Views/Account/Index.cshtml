@@ -1,6 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@using MVCProject.ViewModels
+@model AccountIndexViewModel
+
+<h1>@ViewData["sentence"]</h1>
+<h1>@ViewBag.myname</h1>
+<h1>@ViewBag.sentence</h1>
+<h1>@ViewData["myname"]</h1>
+
+@if(Model?.Books.Count > 0){
+    <h1>List of books</h1>
+    <table class="table table-dark table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Books)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Author</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-<h1>Front end of Account Index page</h1>
+else{
+    <h1>No record found</h1>
+}
