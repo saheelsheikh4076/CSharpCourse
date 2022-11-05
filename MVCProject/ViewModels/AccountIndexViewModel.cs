@@ -1,12 +1,17 @@
-﻿namespace MVCProject.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MVCProject.ViewModels
 {
     public class AccountIndexViewModel
     {
-        public List<Book> Books { get; set; }
+        public Book Book { get; set; }
+        public List<Book>? Books { get; set; }
     }
     public class Book
     {
         public string Title { get; set; }
-        public string Author { get; set; }       
+        [Required(ErrorMessage ="Please enter author name")]
+        [Display(Name ="Author Name",Prompt ="Enter author name")]
+        public string Auth { get; set; }       
     }
 }

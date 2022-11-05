@@ -1,12 +1,39 @@
 ﻿@using MVCProject.ViewModels
 @model AccountIndexViewModel
 
-<h1>@ViewData["sentence"]</h1>
+@*<h1>@ViewData["sentence"]</h1>
 <h1>@ViewBag.myname</h1>
 <h1>@ViewBag.sentence</h1>
-<h1>@ViewData["myname"]</h1>
+<h1>@ViewData["myname"]</h1>*@
+<h1>Add book</h1>
+<form asp-controller="Account" asp-action="Index" method="post">
+    <table class="table">
+        <tr>
+            <td>
+                <label asp-for="Book.Title"></label>
+            </td>
+            <td>
+                <input asp-for="Book.Title" class="form-control" />
+                <span class="text-danger" asp-validation-for="Book.Title"></span>
+                @*<input name="Title" class="form-control" />*@
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Book.Auth"></label>
+            </td>
+            <td>
+                <input asp-for="Book.Auth" class="form-control" />
+                <span class="text-danger" asp-validation-for="Book.Auth"></span>
+                @*<input name="Author" class="form-control" />*@
+            </td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <div asp-validation-summary="All" class="text-danger"></div>
+</form>
 
-@if(Model?.Books.Count > 0){
+@if(Model?.Books?.Count > 0){
     <h1>List of books</h1>
     <table class="table table-dark table-striped table-hover">
         <thead>
@@ -20,7 +47,7 @@
             {
                 <tr>
                     <td>@item.Title</td>
-                    <td>@item.Author</td>
+                    <td>@item.Auth</td>
                 </tr>
             }
         </tbody>
@@ -29,3 +56,5 @@
 else{
     <h1>No record found</h1>
 }
+
+
