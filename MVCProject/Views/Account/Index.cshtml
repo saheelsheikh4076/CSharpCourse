@@ -25,6 +25,45 @@
             <td>
                 <input asp-for="Book.Auth" class="form-control" />
                 <span class="text-danger" asp-validation-for="Book.Auth"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Book.Password"></label>
+            </td>
+            <td>
+                <input asp-for="Book.Password" class="form-control" />
+                <span class="text-danger" asp-validation-for="Book.Password"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Book.Address"></label>
+            </td>
+            <td>
+                <textarea rows="5" asp-for="Book.Address" class="form-control"></textarea>
+                <span class="text-danger" asp-validation-for="Book.Address"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Book.Language"></label>
+            </td>
+            <td>
+                <select asp-for="Book.Language" class="form-control">
+                    <option value="1">Hindi</option>
+                    <option value="2">English</option>
+                    <option value="3">Urdu</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Book.IsPublished"></label>
+            </td>
+            <td>
+                <input asp-for="Book.IsPublished"  />
+                <span class="text-danger" asp-validation-for="Book.IsPublished"></span>
                 @*<input name="Author" class="form-control" />*@
             </td>
         </tr>

@@ -30,6 +30,7 @@ namespace MVCProject.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         //public IActionResult Index(string Title, string Author)
         public IActionResult Index(AccountIndexViewModel model)
         {
