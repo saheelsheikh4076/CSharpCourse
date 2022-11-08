@@ -21,5 +21,13 @@ namespace MVCProject.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public string Address { get; set; }
+        
+        public string Colour { get; set; }
+        public string Gender { get; set; }
+        public List<string> Tags { get; set; }
+        [EmailAddress]
+        [Required]
+        public string Email { get; set; }
+        public IFormFile File { get; set; }
     }
 }

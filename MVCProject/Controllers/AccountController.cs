@@ -34,7 +34,7 @@ namespace MVCProject.Controllers
         //public IActionResult Index(string Title, string Author)
         public IActionResult Index(AccountIndexViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && model.Book.File.ContentType== "image/jpeg")
             {
 
             }

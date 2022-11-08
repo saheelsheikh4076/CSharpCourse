@@ -5,8 +5,8 @@
 <h1>@ViewBag.myname</h1>
 <h1>@ViewBag.sentence</h1>
 <h1>@ViewData["myname"]</h1>*@
-<h1>Add book</h1>
-<form asp-controller="Account" asp-action="Index" method="post">
+<h1>Add book</h1>@*"#0d6efd"*@
+<form enctype="multipart/form-data" asp-controller="Account" asp-action="Index" method="post">
     <table class="table">
         <tr>
             <td>
@@ -62,9 +62,67 @@
                 <label asp-for="Book.IsPublished"></label>
             </td>
             <td>
-                <input asp-for="Book.IsPublished"  />
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" asp-for="Book.IsPublished">
+                    @*<label class="form-check-label" asp-for="Book.IsPublished"></label>*@
+                </div>
                 <span class="text-danger" asp-validation-for="Book.IsPublished"></span>
-                @*<input name="Author" class="form-control" />*@
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Book.Colour"></label>
+            </td>
+            <td>
+                <input type="color" asp-for="Book.Colour" class="form-control form-control-color" />
+                <span class="text-danger" asp-validation-for="Book.Colour"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Book.Gender"></label>
+            </td>
+            <td>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="Book.Gender" id="flexRadioDefault1" value="Male">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Male
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="Book.Gender" id="flexRadioDefault2" checked value="Female">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Female
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Book.Tags"></label>
+            </td>
+            <td>
+                <select class="form-select" multiple aria-label="multiple select example" asp-for="Book.Tags">
+                    <option selected>Open this select menu</option>
+                    <option value="Book">Book</option>
+                    <option value="Magazine">Magazine</option>
+                    <option value="Journal">Journal</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label asp-for="Book.Email"></label></td>
+            <td>
+                <input asp-for="Book.Email" class="form-control" />
+                <span asp-validation-for="Book.Email" class="text-danger"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label asp-for="Book.File"></label></td>
+            <td>
+                <input asp-for="Book.File" class="form-control" />
+                <span asp-validation-for="Book.File" class="text-danger"></span>
             </td>
         </tr>
     </table>
@@ -72,7 +130,8 @@
     <div asp-validation-summary="All" class="text-danger"></div>
 </form>
 
-@if(Model?.Books?.Count > 0){
+@if (Model?.Books?.Count > 0)
+{
     <h1>List of books</h1>
     <table class="table table-dark table-striped table-hover">
         <thead>
@@ -92,7 +151,8 @@
         </tbody>
     </table>
 }
-else{
+else
+{
     <h1>No record found</h1>
 }
 
