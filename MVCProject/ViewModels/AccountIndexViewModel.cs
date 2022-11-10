@@ -9,7 +9,7 @@ namespace MVCProject.ViewModels
     }
     public class Book
     {
-        [Required(ErrorMessage="Title is required")]
+        [Required(ErrorMessage=" Please enter book title")]
         [Display(Name ="Book title", Prompt ="Enter book title")]
         public string Title { get; set; }
         [Required(ErrorMessage ="Please enter author name")]

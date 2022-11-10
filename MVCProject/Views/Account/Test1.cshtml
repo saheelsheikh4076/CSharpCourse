@@ -1,0 +1,15 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*<h1>@TempData["Heading"]</h1>*@
+Above method is used to fetch the data and mark for deletion for future
+
+
+<h1>Peek Method</h1>
+This method is used to fetch the data and does not mark it for deletion
+<h1>@TempData.Peek("Heading")</h1>
+
+<h1>Keep Method</h1>
+This method is used to remove mark for deletion
