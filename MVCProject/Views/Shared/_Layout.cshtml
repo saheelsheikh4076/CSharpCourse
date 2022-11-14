@@ -49,8 +49,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
 @*    following two files are required for on page validation*@
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<partial name="_ValidationScriptPartial" />
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

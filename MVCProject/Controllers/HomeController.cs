@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVCProject.Models;
+using MVCProject.ViewModels;
 using System.Diagnostics;
 
 namespace MVCProject.Controllers
@@ -32,7 +33,17 @@ namespace MVCProject.Controllers
         {
             return View();
         }
-
+        public IActionResult TestPage()
+        {
+            var model = new BannerPartialViewModel
+            {
+                Name = "Irfan from Controller",
+                Age = 40,
+                Address = "Nagpur",
+                Mobile = "3453453"
+            };
+            return View(model);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

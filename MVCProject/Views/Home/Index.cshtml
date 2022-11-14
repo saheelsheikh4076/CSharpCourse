@@ -1,8 +1,22 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@section Head{
+    <title>Home page using Section</title>
+    <link href="~/css/site.css" rel="stylesheet" />
+}
+    @{
+    var model = new BannerPartialViewModel
+            {
+                Name = "Arshad",
+                Age = 30,
+                Address = "Jalgaon",
+                Mobile = "22332223232"
+            };
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>This content is coming from Home/Index page.</h1>
+<partial name="_BannerPartial" model="model" />
+<h1>Defination: Partial page is dependent on View for passing data/model</h1>
+
+@section Footer{
+    <h3>This is a footer content</h3>
+}
+
