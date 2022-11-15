@@ -1,7 +1,11 @@
+using Repositories;
+using Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddMvc();
+builder.Services.AddSingleton<IRollList, RollList>();
 
 var app = builder.Build();
 

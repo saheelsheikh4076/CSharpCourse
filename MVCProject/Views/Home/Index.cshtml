@@ -13,6 +13,10 @@
 }
 
 <h1>This content is coming from Home/Index page.</h1>
+@*@await Component.InvokeAsync("Banner",new { Name="Arshad", Age = 30, Address = "Jalgaon", Mobile = "323423"})*@
+@*@await Component.InvokeAsync("Banner",new BannerPartialViewModel{ Name="Arshad", Age = 30, Address = "Jalgaon", Mobile = "323423"})*@
+@*@await Component.InvokeAsync("Banner", model)*@
+@await Component.InvokeAsync("Banner", new {data = model})
 <partial name="_BannerPartial" model="model" />
 <h1>Defination: Partial page is dependent on View for passing data/model</h1>
 
