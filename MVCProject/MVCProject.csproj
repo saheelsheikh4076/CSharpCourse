@@ -11,4 +11,9 @@
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Shared\" />
+    <Folder Include="wwwroot\Upload\" />
+  </ItemGroup>
+
 </Project>

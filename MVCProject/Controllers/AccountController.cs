@@ -9,6 +9,13 @@ namespace MVCProject.Controllers
     }
     public class AccountController : Controller
     {
+        private readonly IWebHostEnvironment webHostEnvironment;
+
+        public AccountController(IWebHostEnvironment webHostEnvironment)
+        {
+            this.webHostEnvironment = webHostEnvironment;
+        }
+
         public IActionResult Test5()
         {
 
@@ -61,6 +68,8 @@ namespace MVCProject.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            var webrootpath = webHostEnvironment.WebRootPath;
+            var folderPath = Path.Combine(webrootpath, "Upload");
             TempData["Heading"] = "This heading is coming from backend";
             if (TempData.ContainsKey("Heading"))
             {
@@ -101,9 +110,20 @@ namespace MVCProject.Controllers
         //public IActionResult Index(string Title, string Author)
         public IActionResult Index(AccountIndexViewModel model)
         {
-            if (ModelState.IsValid && model.Book.File.ContentType== "image/jpeg")
+            if (ModelState.IsValid && (model.Book.File.ContentType== "image/jpeg"|| model.Book.File.ContentType == "image/png"))
             {
-
+                var webrootpath = webHostEnvironment.WebRootPath;
+                var folderPath = Path.Combine(webrootpath, "Upload");
+                var filePath = Path.Combine(folderPath, model.Book.File.FileName);
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Book.File.CopyTo(stream);
+                }
+                //var contentrootpath = webHostEnvironment.ContentRootPath;//+"wwwroot"
             }
             return View();
         }
