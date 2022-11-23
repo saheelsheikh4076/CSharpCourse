@@ -1,5 +1,12 @@
 ﻿@model List<StudentIndexViewModel> 
 
+<form method="post">
+    Starts with
+    <input type="text" name="text" />
+    <button type="submit">Submit</button>
+</form>
+
+
 <table>
     @foreach (var item in Model)
     {

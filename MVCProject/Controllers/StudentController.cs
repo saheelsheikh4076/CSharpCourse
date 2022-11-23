@@ -6,16 +6,31 @@ namespace MVCProject.Controllers
 {
     public class StudentController : Controller
     {
+        private readonly IConfiguration configuration;
+
+        public StudentController(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
         public IActionResult Index()
         {
-            List<StudentIndexViewModel> model = new ();
-            string connectionString = "Data Source=(local);Initial Catalog=TestDb1;Integrated Security=True";
-            using(SqlConnection connection = new SqlConnection(connectionString))
+            List<StudentIndexViewModel> model = new();
+
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Index(string text)
+        {
+            List<StudentIndexViewModel> model = new();
+            string connectionString = configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                
-                using (SqlCommand command = new SqlCommand("select * from StudentTable", connection))
+                //select * from StudentTable where Name like '  ';Delete from StudentTable --%'
+                string cmd = "select * from StudentTable where Name = '@text'";
+                using (SqlCommand command = new SqlCommand(cmd, connection))
                 {
+                    command.Parameters.AddWithValue("@text", text);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -33,7 +48,7 @@ namespace MVCProject.Controllers
                                 });
                             }
                         }
-                    } 
+                    }
                 }
                 connection.Close();
             }
@@ -47,13 +62,13 @@ namespace MVCProject.Controllers
             //catch (Exception)
             //{
 
-                
+
             //}
             //finally
             //{//Finally block executes always
             //    connection.Close();
             //}
-           
+
             return View(model);
         }
     }
