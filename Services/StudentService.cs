@@ -1,31 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MVCProject.ViewModels;
+﻿using ViewModels;
 using System.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using static System.Net.Mime.MediaTypeNames;
+using System.Reflection;
 
-namespace MVCProject.Controllers
+namespace Services
 {
-    public class StudentController : Controller
+    public class StudentService : IStudent
     {
-        private readonly IConfiguration configuration;
+        private readonly string connectionString = string.Empty;
 
-        public StudentController(IConfiguration configuration)
+        public StudentService(IConfiguration config)
         {
-            this.configuration = configuration;
+            this.connectionString = config.GetConnectionString("DefaultConnection");
         }
-        public IActionResult Index()
+        public void AddStudent(StudentViewModel student)
         {
-            List<StudentIndexViewModel> model = new();
+            throw new NotImplementedException();
+        }
 
-            return View(model);
-        }
-        [HttpPost]
-        public IActionResult Index(string text)
+        public void DeleteStudent(int id)
         {
-            List<StudentIndexViewModel> model = new();
-            string connectionString = configuration.GetConnectionString("DefaultConnection");
-            using (SqlConnection connection = new SqlConnection())
+            throw new NotImplementedException();
+        }
+
+        public List<StudentViewModel> GetAllStudents()
+        {
+            List<StudentViewModel> model = new List<StudentViewModel>();
+            using(SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.ConnectionString = connectionString;
                 connection.Open();
                 //select * from StudentTable where Name like '  ';Delete from StudentTable --%'
                 string cmd = "select * from StudentTable where Name Like @text";
@@ -33,7 +36,7 @@ namespace MVCProject.Controllers
                 {
                     command.CommandText = cmd;
                     command.Connection = connection;
-                    command.Parameters.AddWithValue("@text", text+"%");
+                    command.Parameters.AddWithValue("@text", text + "%");
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -41,7 +44,7 @@ namespace MVCProject.Controllers
                             while (reader.Read())
                             {
                                 int.TryParse(reader["Gender"].ToString(), out int gender);
-                                model.Add(new StudentIndexViewModel
+                                model.Add(new StudentViewModel
                                 {
                                     //Id = reader.GetInt32(0),
                                     //Id = Convert.ToInt32(reader[0]),
@@ -53,27 +56,20 @@ namespace MVCProject.Controllers
                             }
                         }
                     }
-                }
-                connection.Close();
+
+                    connection.Close();
             }
+                return model;
+        }
 
-            //SqlConnection connection = new SqlConnection(connectionString);
-            //try
-            //{
-            //    connection.Open();
-            //    //
-            //}
-            //catch (Exception)
-            //{
+        public StudentViewModel GetStudentById(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-
-            //}
-            //finally
-            //{//Finally block executes always
-            //    connection.Close();
-            //}
-
-            return View(model);
+        public void UpdateStudent(StudentViewModel student)
+        {
+            throw new NotImplementedException();
         }
     }
 }
