@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddMvc();
 builder.Services.AddSingleton<IRollList, RollList>();
+builder.Services.AddTransient<IStudent,StudentService>();
 
 var app = builder.Build();
 
@@ -28,6 +29,6 @@ app.UseAuthorization();//Roles
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Student}/{action=Index}/{id?}");
+    pattern: "{controller=Student}/{action=Students}/{id?}");
 
 app.Run();

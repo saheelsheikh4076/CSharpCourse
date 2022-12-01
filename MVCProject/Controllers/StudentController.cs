@@ -1,17 +1,49 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVCProject.ViewModels;
+using Services;
 using System.Data.SqlClient;
+using ViewModels;
 
 namespace MVCProject.Controllers
 {
     public class StudentController : Controller
     {
         private readonly IConfiguration configuration;
+        private readonly IStudent student;
 
-        public StudentController(IConfiguration configuration)
+        public StudentController(IConfiguration configuration, IStudent student)
         {
             this.configuration = configuration;
+            this.student = student;
         }
+        [HttpGet]
+        public IActionResult Students()
+        {
+            var model = student.GetAllStudents();
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult AddStudent()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddStudent(StudentViewModel model)
+        {
+            //model.Id = 0;
+            if (ModelState.IsValid)
+            {
+                student.AddStudent(model);
+                return RedirectToAction("Students");
+            }
+            return View(model);
+        }
+
+
+
+
         public IActionResult Index()
         {
             List<StudentIndexViewModel> model = new();

@@ -1,0 +1,25 @@
+﻿
+@model IEnumerable<StudentViewModel>
+
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(s=>s.Id)</th>
+            <th>@Html.DisplayNameFor(s=>s.Name)</th>
+            <th>@Html.DisplayNameFor(s=>s.Age)</th>
+            <th>@Html.DisplayNameFor(s=>s.Gender)</th>
+          
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Age</td>
+            <td>@item.Gender</td>
+        </tr>
+    }
+</table>
