@@ -40,9 +40,32 @@ namespace MVCProject.Controllers
             }
             return View(model);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteStudent(int StudentId)
+        {
+            student.DeleteStudent(StudentId);
+            return RedirectToAction("Students");
+        }
 
+        [HttpGet]
+        public IActionResult UpdateStudent(int StudentId)
+        {
+            var model = student.GetStudentById(StudentId);
+            return View(model);
+        }
 
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateStudent(StudentViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                student.UpdateStudent(model);
+                return RedirectToAction("Students");
+            }
+            return View(model);
+        }
 
         public IActionResult Index()
         {

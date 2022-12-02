@@ -1,0 +1,33 @@
+﻿@model StudentViewModel
+@{
+}
+
+<form method="post">
+    <input asp-for="Id" hidden disabled class="form-control" />
+    <table>
+        <tr>
+            <td>@Html.DisplayNameFor(s=>s.Name)</td>
+            <td>
+                <input asp-for="Name" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(s=>s.Age)</td>
+            <td>
+                <input asp-for="Age" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(s=>s.Gender)</td>
+            <td>
+                <input asp-for="Gender" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button type="submit" class="btn btn-success">Update Student</button>
+            </td>
+        </tr>
+    </table>
+</form>

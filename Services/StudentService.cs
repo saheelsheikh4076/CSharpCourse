@@ -75,20 +75,18 @@ namespace Services
                     {
                         if (reader.HasRows)
                         {
-                            StudentViewModel student = new StudentViewModel();//This line is taken out to prevent high memory usage
-                            //to avoid multiple instantiations.
-                            //in this case we have to assign all the properties compulsorily
                             while (reader.Read())
                             {
                                 var isGender = int.TryParse(reader["Gender"].ToString(), out int gender);
                                 var isAge = int.TryParse(reader["Age"].ToString(), out int age);
-                               
-                                student.Id = Convert.ToInt32(reader["Id"]);
-                                student.Name = reader["Name"].ToString();
-                                //if (isGender) student.Gender = gender; if next row has null then it will keep old value for next row
-                                student.Gender = isGender ? gender : null;
-                                student.Age = isAge ? age : null;
-                                model.Add(student);
+                                                           
+                                model.Add(new StudentViewModel
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    Name = reader["Name"].ToString(),
+                                    Gender = isGender ? gender : null,
+                                    Age = isAge ? age : null
+                                });
                             }
                         }
                     }
@@ -112,9 +110,9 @@ namespace Services
                     {
                         if (reader.HasRows)
                         {
+                            reader.Read();
                             var isGender = int.TryParse(reader["Gender"].ToString(), out int gender);
                             var isAge = int.TryParse(reader["Age"].ToString(), out int age);
-                            reader.Read();
                             model.Id = Convert.ToInt32(reader["Id"]);
                             model.Name = reader["Name"].ToString();
                             model.Gender = isGender ? gender : null;
