@@ -1,15 +1,17 @@
 ﻿using ViewModels;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace Services
 {
     public class StudentService : IStudent
     {
         private readonly string connectionString = string.Empty;
-
-        public StudentService(IConfiguration config)
+        private readonly IDataProtector protector;
+        public StudentService(IConfiguration config,IDataProtectionProvider dataProtectionProvider)
         {
+            this.protector = dataProtectionProvider.CreateProtector("Irfan");
             this.connectionString = config.GetConnectionString("DefaultConnection");
         }
         public void AddStudent(StudentViewModel student)
@@ -29,15 +31,16 @@ namespace Services
             }
         }
 
-        public void DeleteStudent(int id)
+        public void DeleteStudent(string id)
         {
+            var _id = Convert.ToInt32(protector.Unprotect(id));
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 var query = "Delete from StudentTable where Id = @id";
                 connection.Open();
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                   command.Parameters.AddWithValue("@id", id);
+                   command.Parameters.AddWithValue("@id", _id);
                    var rowsAffected = command.ExecuteNonQuery();
                 }
                 connection.Close();
@@ -45,13 +48,14 @@ namespace Services
         }
         public void UpdateStudent(StudentViewModel student)//Make sure that student parameter has id
         {
+            int _id = Convert.ToInt32(protector.Unprotect(student.ProtectedId));
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 var query = "Update StudentTable Set Age = @age, Gender = @gender, Name = @name where id = @id";
                 connection.Open();
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@id", student.Id);
+                    command.Parameters.AddWithValue("@id", _id);
                     command.Parameters.AddWithValue("@name", student.Name);
                     command.Parameters.AddWithValue("@age", student.Age);
                     command.Parameters.AddWithValue("@gender", student.Gender);
@@ -82,6 +86,7 @@ namespace Services
                                                            
                                 model.Add(new StudentViewModel
                                 {
+                                    ProtectedId = protector.Protect(reader["Id"].ToString()),
                                     Id = Convert.ToInt32(reader["Id"]),
                                     Name = reader["Name"].ToString(),
                                     Gender = isGender ? gender : null,
@@ -96,8 +101,9 @@ namespace Services
             return model;
         }
 
-        public StudentViewModel GetStudentById(int id)
+        public StudentViewModel GetStudentById(string id)
         {
+            int _id = Convert.ToInt32(protector.Unprotect(id));
             StudentViewModel model = new StudentViewModel();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -105,7 +111,7 @@ namespace Services
                 var query = "select top(1) * from StudentTable where Id = @id";
                 using (SqlCommand cmd = new SqlCommand(query,connection))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@id", _id);
                     using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -113,6 +119,7 @@ namespace Services
                             reader.Read();
                             var isGender = int.TryParse(reader["Gender"].ToString(), out int gender);
                             var isAge = int.TryParse(reader["Age"].ToString(), out int age);
+                            model.ProtectedId = protector.Protect(reader["Id"].ToString());
                             model.Id = Convert.ToInt32(reader["Id"]);
                             model.Name = reader["Name"].ToString();
                             model.Gender = isGender ? gender : null;

@@ -8,6 +8,7 @@ namespace ViewModels
         {
             this.Name = string.Empty;
         }
+        public string ProtectedId { get; set; }
         [Display(Name="Unique ID")]
         public int Id { get; set; }
         [Display(Name="Full Name")]

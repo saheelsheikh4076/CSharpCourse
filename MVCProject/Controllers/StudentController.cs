@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Mvc;
 using MVCProject.ViewModels;
 using Services;
 using System.Data.SqlClient;
@@ -10,9 +11,12 @@ namespace MVCProject.Controllers
     {
         private readonly IConfiguration configuration;
         private readonly IStudent student;
+        private readonly IDataProtector protector;
 
-        public StudentController(IConfiguration configuration, IStudent student)
+        public StudentController(IConfiguration configuration, IStudent student,
+            IDataProtectionProvider dataProtectionProvider)
         {
+            this.protector = dataProtectionProvider.CreateProtector("Irfan");
             this.configuration = configuration;
             this.student = student;
         }
@@ -42,14 +46,14 @@ namespace MVCProject.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteStudent(int StudentId)
+        public IActionResult DeleteStudent(string StudentId)
         {
             student.DeleteStudent(StudentId);
             return RedirectToAction("Students");
         }
 
         [HttpGet]
-        public IActionResult UpdateStudent(int StudentId)
+        public IActionResult UpdateStudent(string StudentId)
         {
             var model = student.GetStudentById(StudentId);
             return View(model);

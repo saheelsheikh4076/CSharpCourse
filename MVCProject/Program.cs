@@ -4,6 +4,7 @@ using Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDataProtection();
 builder.Services.AddMvc();
 builder.Services.AddSingleton<IRollList, RollList>();
 builder.Services.AddTransient<IStudent,StudentService>();

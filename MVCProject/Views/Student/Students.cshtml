@@ -1,6 +1,8 @@
 ﻿
 @model IEnumerable<StudentViewModel>
-
+@{
+    int i = 1;
+}
 
 <a asp-controller="Student" asp-action="AddStudent" class="btn btn-outline-primary">Add Student</a>
 <table class="table table-bordered">
@@ -16,14 +18,14 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.Id</td>
+            <td>@(i++)</td>
             <td>@item.Name</td>
             <td>@item.Age</td>
             <td>@item.Gender</td>
             <td>
-                <form method="post" asp-controller="Student" asp-action="DeleteStudent" asp-route-StudentId="@item.Id">
+                <form method="post" asp-controller="Student" asp-action="DeleteStudent" asp-route-StudentId="@item.ProtectedId">
                     <button type="submit" class="btn btn-danger">Delete</button>
-                    <a asp-controller="Student" asp-action="UpdateStudent" asp-route-StudentId="@item.Id" class="btn btn-warning">Update</a>
+                    <a asp-controller="Student" asp-action="UpdateStudent" asp-route-StudentId="@item.ProtectedId" class="btn btn-warning">Update</a>
                 </form>
             </td>
         </tr>
