@@ -1,13 +1,21 @@
+using Microsoft.EntityFrameworkCore;
+using MVCProject.Data;
+using MVCProject.Services;
 using Repositories;
 using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")??string.Empty;
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
 builder.Services.AddDataProtection();
 builder.Services.AddMvc();
 builder.Services.AddSingleton<IRollList, RollList>();
-builder.Services.AddTransient<IStudent,StudentService>();
+builder.Services.AddTransient<IStudent,StudentServiceEF>();
 
 var app = builder.Build();
 
