@@ -8,18 +8,21 @@
             <td>@Html.DisplayNameFor(s=>s.Name)</td>
             <td>
                 <input asp-for="Name" class="form-control" />
+                <span class="text-danger" asp-validation-for="Name"></span>
             </td>
         </tr>
         <tr>
             <td>@Html.DisplayNameFor(s=>s.Age)</td>
             <td>
                 <input asp-for="Age" class="form-control" />
+                <span class="text-danger" asp-validation-for="Age"></span>
             </td>
         </tr>
         <tr>
             <td>@Html.DisplayNameFor(s=>s.Gender)</td>
             <td>
                 <input asp-for="Gender" class="form-control" />
+                <span class="text-danger" asp-validation-for="Gender"></span>
             </td>
         </tr>
         <tr>
@@ -29,4 +32,5 @@
             </td>
         </tr>
     </table>
+    <div class="text-danger" asp-validation-summary="All"></div>
 </form>

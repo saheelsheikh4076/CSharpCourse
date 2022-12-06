@@ -9,10 +9,10 @@ namespace Services
 {
     public interface IStudent
     {
-        StudentViewModel GetStudentById(string id);
-        void UpdateStudent(StudentViewModel student);
-        void AddStudent(StudentViewModel student);
-        void DeleteStudent(string id);
-        List<StudentViewModel> GetAllStudents();
+        Task<StudentViewModel> GetStudentById(string id);
+        Task UpdateStudent(StudentViewModel student);
+        Task AddStudent(StudentViewModel student);
+        Task DeleteStudent(string id);
+        Task<List<StudentViewModel>> GetAllStudents();
     }
 }

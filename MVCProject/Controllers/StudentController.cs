@@ -21,9 +21,9 @@ namespace MVCProject.Controllers
             this.student = student;
         }
         [HttpGet]
-        public IActionResult Students()
+        public async Task<IActionResult> Students()
         {
-            var model = student.GetAllStudents();
+            var model = await student.GetAllStudents();
             return View(model);
         }
 
@@ -34,38 +34,39 @@ namespace MVCProject.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddStudent(StudentViewModel model)
+        public async Task<IActionResult> AddStudent(StudentViewModel model)
         {
             //model.Id = 0;
             if (ModelState.IsValid)
             {
-                student.AddStudent(model);
+                await student.AddStudent(model);
                 return RedirectToAction("Students");
             }
+            //ModelState.AddModelError("", "Its my error");
             return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteStudent(string StudentId)
+        public async Task<IActionResult> DeleteStudent(string StudentId)
         {
-            student.DeleteStudent(StudentId);
+            await student.DeleteStudent(StudentId);
             return RedirectToAction("Students");
         }
 
         [HttpGet]
-        public IActionResult UpdateStudent(string StudentId)
+        public async Task<IActionResult> UpdateStudent(string StudentId)
         {
-            var model = student.GetStudentById(StudentId);
+            var model = await student.GetStudentById(StudentId);
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult UpdateStudent(StudentViewModel model)
+        public async Task<IActionResult> UpdateStudent(StudentViewModel model)
         {
             if (ModelState.IsValid)
             {
-                student.UpdateStudent(model);
+                await student.UpdateStudent(model);
                 return RedirectToAction("Students");
             }
             return View(model);
@@ -78,7 +79,7 @@ namespace MVCProject.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult Index(string text)
+        public async Task<IActionResult> Index(string text)
         {
             List<StudentIndexViewModel> model = new();
             string connectionString = configuration.GetConnectionString("DefaultConnection");

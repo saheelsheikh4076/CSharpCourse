@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.DataProtection;
 
 namespace Services
 {
-    public class StudentService : IStudent
+    public class StudentService
     {
         private readonly string connectionString = string.Empty;
         private readonly IDataProtector protector;

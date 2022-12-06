@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.DataProtection;
+using Microsoft.EntityFrameworkCore;
 using MVCProject.Data;
 using Services;
+using System.Collections.Generic;
 using ViewModels;
 
 namespace MVCProject.Services
@@ -14,7 +16,7 @@ namespace MVCProject.Services
             this.protector = dataProtectionProvider.CreateProtector("Irfan");
             this.dbContext = dbContext;
         }
-        public void AddStudent(StudentViewModel student)
+        public async Task AddStudent(StudentViewModel student)
         {
             StudentTable std = new StudentTable
             {
@@ -22,38 +24,52 @@ namespace MVCProject.Services
                 Gender = student.Gender,
                 Age = student.Age,
             };
-            dbContext.StudentTable.Add(std);
-            dbContext.SaveChanges();
+            await dbContext.StudentTable.AddAsync(std);
+            await dbContext.SaveChangesAsync();
         }
 
-        public void DeleteStudent(string id)
+        public async Task DeleteStudent(string id)
         {
-            var student = dbContext.StudentTable.Find(id);
+            var _id = Convert.ToInt32(protector.Unprotect(id));
+            var student = await dbContext.StudentTable.FindAsync(_id);
             if(student!=null)
             {
                 dbContext.StudentTable.Remove(student);
-                dbContext.SaveChanges();
+                await dbContext.SaveChangesAsync();
             }
         }
 
-        public List<StudentViewModel> GetAllStudents()
+        public async Task<List<StudentViewModel>> GetAllStudents()
         {
-            var students = dbContext.StudentTable.Select(s=>new StudentViewModel
+            //var students = dbContext.StudentTable.Select(s=>new StudentViewModel
+            //{
+            //    Name = s.Name,
+            //    Gender = s.Gender,
+            //    Age = s.Age,
+            //    Id = s.Id
+            //}).ToList();
+            //students.ForEach(s => s.ProtectedId = protector.Protect(s.Id.ToString()));
+            List<StudentViewModel> students = new List<StudentViewModel>();
+            var studentList = await dbContext.StudentTable.ToListAsync();//Tracking Avoid
+            foreach (var item in studentList)
             {
-                Name = s.Name,
-                Gender = s.Gender,
-                Age = s.Age,
-                Id = s.Id
-            }).ToList();
-            students.ForEach(s => s.ProtectedId = protector.Protect(s.Id.ToString()));
+                students.Add(new StudentViewModel()
+                {
+                    Age = item.Age,
+                    Name = item.Name,
+                    Gender = item.Gender,
+                    Id = item.Id,
+                    ProtectedId = protector.Protect(item.Id.ToString())
+                });
+            }
             return students;
         }
 
-        public StudentViewModel GetStudentById(string id)
+        public async Task<StudentViewModel> GetStudentById(string id)
         {
             StudentViewModel model = new StudentViewModel();
             var _id = Convert.ToInt32(protector.Unprotect(id));
-            var student = dbContext.StudentTable.Find(_id);
+            var student = await dbContext.StudentTable.FindAsync(_id);//Avoid Tracking
             if (student != null)
             {
                 model.Id = student.Id;
@@ -65,16 +81,19 @@ namespace MVCProject.Services
             return model;
         }
 
-        public void UpdateStudent(StudentViewModel student)
+        public async Task UpdateStudent(StudentViewModel student)
         {
-            var _id = Convert.ToInt32(protector.Unprotect(student.ProtectedId));
-            var std = dbContext.StudentTable.Find(_id);
-            if (std != null)
+            if (!string.IsNullOrEmpty(student.ProtectedId))
             {
-                std.Name = student.Name;
-                std.Age = student.Age;
-                std.Gender = student.Gender;
-                dbContext.SaveChanges();
+                var _id = Convert.ToInt32(protector.Unprotect(student.ProtectedId));
+                var std = await dbContext.StudentTable.FindAsync(_id);
+                if (std != null)
+                {
+                    std.Name = student.Name;
+                    std.Age = student.Age;
+                    std.Gender = student.Gender;
+                    await dbContext.SaveChangesAsync();
+                } 
             }
         }
     }
