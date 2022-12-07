@@ -81,7 +81,7 @@ namespace Services
                         {
                             while (reader.Read())
                             {
-                                var isGender = int.TryParse(reader["Gender"].ToString(), out int gender);
+                                var isGender = byte.TryParse(reader["Gender"].ToString(), out byte gender);
                                 var isAge = int.TryParse(reader["Age"].ToString(), out int age);
                                                            
                                 model.Add(new StudentViewModel
@@ -117,7 +117,7 @@ namespace Services
                         if (reader.HasRows)
                         {
                             reader.Read();
-                            var isGender = int.TryParse(reader["Gender"].ToString(), out int gender);
+                            var isGender = byte.TryParse(reader["Gender"].ToString(), out byte gender);
                             var isAge = int.TryParse(reader["Age"].ToString(), out int age);
                             model.ProtectedId = protector.Protect(reader["Id"].ToString());
                             model.Id = Convert.ToInt32(reader["Id"]);

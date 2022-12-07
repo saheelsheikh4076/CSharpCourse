@@ -18,20 +18,47 @@ namespace MVCProject.Services
         }
         public async Task AddStudent(StudentViewModel student)
         {
-            StudentTable std = new StudentTable
+            using (var transaction = await dbContext.Database.BeginTransactionAsync())
             {
-                Name = student.Name,
-                Gender = student.Gender,
-                Age = student.Age,
-            };
-            await dbContext.StudentTable.AddAsync(std);
-            await dbContext.SaveChangesAsync();
+                try
+                {
+                    GenderTable gender = new GenderTable()
+                    {
+                        Gender = "Male"
+                    };
+                    await dbContext.GenderTable.AddAsync(gender);
+                    await dbContext.SaveChangesAsync();
+                    //If error occurs here
+                    //Here we can get id of above table
+                    StudentTable std = new StudentTable
+                    {
+                        Name = student.Name,
+                        GenderTableId = gender.Id,
+                        Age = student.Age,
+                    };
+                    await dbContext.StudentTable.AddAsync(std);
+                    await dbContext.SaveChangesAsync();
+                    //if control reaches here, it means data saved successfully
+                    await transaction.CommitAsync();
+                }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                } 
+            }
         }
 
         public async Task DeleteStudent(string id)
         {
             var _id = Convert.ToInt32(protector.Unprotect(id));
             var student = await dbContext.StudentTable.FindAsync(_id);
+            var student1 = await dbContext.StudentTable.Where(s => s.Id == _id).SingleOrDefaultAsync();
+            var student2 = await dbContext.StudentTable.Where(s => s.Id == _id).FirstOrDefaultAsync();
+            var student3 = await dbContext.StudentTable.Where(s => s.Id == _id).LastOrDefaultAsync();
+            var student4 = await dbContext.StudentTable.FirstOrDefaultAsync(s => s.Id == _id);
+
+            var student5 = await (from s in dbContext.StudentTable where s.Id == _id select s).FirstOrDefaultAsync();
+
             if(student!=null)
             {
                 dbContext.StudentTable.Remove(student);
@@ -51,13 +78,14 @@ namespace MVCProject.Services
             //students.ForEach(s => s.ProtectedId = protector.Protect(s.Id.ToString()));
             List<StudentViewModel> students = new List<StudentViewModel>();
             var studentList = await dbContext.StudentTable.ToListAsync();//Tracking Avoid
+            var studentList1 = await (from s in dbContext.StudentTable select s).ToListAsync();
             foreach (var item in studentList)
             {
                 students.Add(new StudentViewModel()
                 {
                     Age = item.Age,
                     Name = item.Name,
-                    Gender = item.Gender,
+                    Gender = item.GenderTableId,
                     Id = item.Id,
                     ProtectedId = protector.Protect(item.Id.ToString())
                 });
@@ -76,7 +104,7 @@ namespace MVCProject.Services
                 model.ProtectedId = protector.Protect(student.Id.ToString());
                 model.Name = student.Name;
                 model.Age = student.Age; 
-                model.Gender = student.Gender;
+                model.Gender = student.GenderTableId;
             }
             return model;
         }
@@ -91,7 +119,7 @@ namespace MVCProject.Services
                 {
                     std.Name = student.Name;
                     std.Age = student.Age;
-                    std.Gender = student.Gender;
+                    std.GenderTableId = student.Gender;
                     await dbContext.SaveChangesAsync();
                 } 
             }
