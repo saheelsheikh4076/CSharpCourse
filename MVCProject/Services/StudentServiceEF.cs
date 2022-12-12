@@ -44,6 +44,7 @@ namespace MVCProject.Services
                 catch (Exception ex)
                 {
                     await transaction.RollbackAsync();
+                    //Here we can execute code for refund if process fails
                 } 
             }
         }
