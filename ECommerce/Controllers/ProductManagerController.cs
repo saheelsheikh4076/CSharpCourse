@@ -1,4 +1,5 @@
-﻿using ECommerce.ViewModels;
+﻿using ECommerce.Services;
+using ECommerce.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.Controllers
@@ -8,10 +9,15 @@ namespace ECommerce.Controllers
     /// </summary>
     public class ProductManagerController : Controller
     {
-        public IActionResult Index()
+        private readonly IProductServices productServices;
+
+        public ProductManagerController(IProductServices productServices)
         {
-            List<ProductListViewModel> model = new List<ProductListViewModel>();
-            //Get list from interface
+            this.productServices = productServices;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var model = await productServices.GetAllProducts().ConfigureAwait(false);
             return View(model);
         }
         [HttpGet]
@@ -25,7 +31,7 @@ namespace ECommerce.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Pass this model to interface for adding in database
+                await productServices.AddProduct(model).ConfigureAwait(false);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -35,15 +41,14 @@ namespace ECommerce.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string ProtectedId)
         {
-            //Pass the id to interface for delete
+            await productServices.DeleteProduct(ProtectedId).ConfigureAwait(false);
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Update(string ProtectedId)
         {
-            //Pass the id to interface and get the record for that id into a model
-            //pass the model to view
-            return View();//model)
+            var model = await productServices.GetProductById(ProtectedId).ConfigureAwait(false);
+            return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -51,7 +56,7 @@ namespace ECommerce.Controllers
         {
             if (ModelState.IsValid)
             {
-                //pass the model to interface for updation
+                await productServices.UpdateProduct(model).ConfigureAwait(false);
                 return RedirectToAction("index");
             }
             return View(model);

@@ -1,4 +1,7 @@
 using ECommerce.Data;
+using ECommerce.Implementations;
+using ECommerce.Models;
+using ECommerce.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +12,9 @@ builder.Services.AddDbContextPool<AppDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
+builder.Services.AddDataProtection();
+builder.Services.AddScoped<AppKeys>();
+builder.Services.AddTransient<IProductServices, ProductRepository>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

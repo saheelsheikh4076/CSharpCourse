@@ -47,7 +47,7 @@
             </td>
             <td>
                 <form method="post" asp-controller="ProductManager" asp-action="Delete" asp-route-ProtectedId="@item.ProtectedId">
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
                         <a asp-controller="ProductManager" asp-action="Update" asp-route-ProtectedId="@item.ProtectedId" class="btn btn-info">Update</a>
                 </form>
             </td>
