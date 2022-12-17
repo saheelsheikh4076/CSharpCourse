@@ -13,6 +13,7 @@ builder.Services.AddDbContextPool<AppDbContext>(options =>
     options.UseSqlServer(connectionString);
 });
 builder.Services.AddDataProtection();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<AppKeys>();
 builder.Services.AddTransient<IProductServices, ProductRepository>();
 builder.Services.AddControllersWithViews();
