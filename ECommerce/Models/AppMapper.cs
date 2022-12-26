@@ -9,6 +9,7 @@ namespace ECommerce.Models
         public AppMapper()
         {
             CreateMap<Product, AddProductViewModel>().ReverseMap();
+            CreateMap<Product, ProductListViewModel>().ReverseMap();
             //CreateMap<List<Product>, List<AddProductViewModel>>().ReverseMap();
         }
     }

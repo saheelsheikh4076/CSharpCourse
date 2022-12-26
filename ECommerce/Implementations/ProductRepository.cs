@@ -45,25 +45,37 @@ namespace ECommerce.Implementations
             }
         }
 
-        public async Task<List<ProductListViewModel>> GetAllProducts()
+        public async Task<(List<ProductListViewModel> ProductList, AppResultStatus Result)> GetAllProducts()
         {
+            AppResultStatus result = new AppResultStatus();
+            result.ErrorCode = 1000;
+            //Mapping Condition is that all the properties in destination must get value from source
             List<ProductListViewModel> productList = new();
-            var products = await dbContext.Product.AsNoTracking().ToListAsync();
-            //productList = mapper.Map<List<ProductListViewModel>>(products);
-            //mapper.Map(products, productList,typeof(List<Product>),typeof(List<ProductListViewModel>));
-            foreach (var product in products)
+            try
             {
-                productList.Add(mapper.Map<ProductListViewModel>(product));
-                //productList.Add(new ProductListViewModel
-                //{
-                //    Id = product.Id,
-                //    Name = product.Name,
-                //    Description = product.Description,
-                //    Price = product.Price,
-                //    ProtectedId = protector.Protect(product.Id.ToString())
-                //});
+                var products = await dbContext.Product.AsNoTracking().ToListAsync();
+                //productList = mapper.Map<List<ProductListViewModel>>(products);
+                //mapper.Map(products, productList,typeof(List<Product>),typeof(List<ProductListViewModel>));
+                foreach (var product in products)
+                {
+                    //productList.Add(mapper.Map<ProductListViewModel>(product));
+                    productList.Add(new ProductListViewModel
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Description = product.Description,
+                        Price = product.Price,
+                        ProtectedId = protector.Protect(product.Id.ToString())
+                    });
+                }
+                result.IsSuccess = true;
             }
-            return productList;
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return (productList,result);
         }
 
         public async Task<UpdateProductViewModel> GetProductById(string productId)
@@ -73,11 +85,11 @@ namespace ECommerce.Implementations
             var _Product = await dbContext.Product.Where(s=>s.Id == id).AsNoTracking().FirstOrDefaultAsync();
             if(_Product != null)
             {
-                //product.Id = _Product.Id;
-                //product.Name = _Product.Name;
-                //product.Description = _Product.Description;
-                //product.Price = _Product.Price;
-                product = mapper.Map<UpdateProductViewModel>(_Product);
+                product.Id = _Product.Id;
+                product.Name = _Product.Name;
+                product.Description = _Product.Description;
+                product.Price = _Product.Price;
+                //product = mapper.Map<UpdateProductViewModel>(_Product);
                 product.ProtectedId = protector.Protect(_Product.Id.ToString());
             }
             return product;

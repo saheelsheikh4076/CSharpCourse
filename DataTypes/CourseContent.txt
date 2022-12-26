@@ -42,3 +42,23 @@
 (5). Overriding.cs
 (6). privateConstructor.cs
 (7). SealedClass.cs
+
+
+
+--------------
+Automapper (map properties and list)
+Error Code Handling
+Custom Error Page
+Identity
+Extension of Identity
+Identity Roles Management
+Authorization (Global, on Action)
+Policy Management
+
+HTML, CSS, JavaScript/JQuery
+
+AJAX
+APIs (CRUD)
+
+Custom Routing
+
