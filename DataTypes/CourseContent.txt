@@ -49,6 +49,7 @@
 Automapper (map properties and list)
 Error Code Handling
 Custom Error Page
+Logging
 Identity
 Extension of Identity
 Identity Roles Management

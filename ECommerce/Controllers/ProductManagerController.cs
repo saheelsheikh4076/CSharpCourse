@@ -17,8 +17,12 @@ namespace ECommerce.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var model = await productServices.GetAllProducts().ConfigureAwait(false);
-            return View(model);
+            var result = await productServices.GetAllProducts().ConfigureAwait(false);
+            if(result.Result.IsSuccess == false)
+            {
+                return View("Error", result.Result);
+            }
+            return View(result.ProductList);
         }
         [HttpGet]
         public async Task<IActionResult> Add()
@@ -31,7 +35,11 @@ namespace ECommerce.Controllers
         {
             if (ModelState.IsValid)
             {
-                await productServices.AddProduct(model).ConfigureAwait(false);
+                var result = await productServices.AddProduct(model).ConfigureAwait(false);
+                if (!result.IsSuccess)
+                {
+                    return View("Error", result);
+                }
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -41,14 +49,22 @@ namespace ECommerce.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string ProtectedId)
         {
-            await productServices.DeleteProduct(ProtectedId).ConfigureAwait(false);
+            var result = await productServices.DeleteProduct(ProtectedId).ConfigureAwait(false);
+            if (!result.IsSuccess)
+            {
+                return View("Error", result);
+            }
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Update(string ProtectedId)
         {
             var model = await productServices.GetProductById(ProtectedId).ConfigureAwait(false);
-            return View(model);
+            if (!model.Result.IsSuccess)
+            {
+                return View("Error", model.Result);
+            }
+            return View(model.Product);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -56,7 +72,11 @@ namespace ECommerce.Controllers
         {
             if (ModelState.IsValid)
             {
-                await productServices.UpdateProduct(model).ConfigureAwait(false);
+                var result = await productServices.UpdateProduct(model).ConfigureAwait(false);
+                if (!result.IsSuccess)
+                {
+                    return View("Error", result);
+                }
                 return RedirectToAction("index");
             }
             return View(model);
