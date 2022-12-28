@@ -36,5 +36,13 @@ namespace Basics
         //Boolean (True or False)
         bool b2 = true;
         Boolean b3 = false;
+        
+        //Globally Unique Identifier
+
+        string id = Guid.NewGuid().ToString();
+
+
+
+
     }
 }
