@@ -1,4 +1,5 @@
-﻿
+﻿using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace IdentityProject.Models
 {
@@ -11,25 +12,37 @@ namespace IdentityProject.Models
     }
     public class EmailService
     {
+        private readonly IConfiguration config;
+
+        public EmailService(IConfiguration config)
+        {
+            this.config = config;
+        }
         public bool SendEmail(EmailData emailData)
         {
             try
             {
                 MimeMessage emailMessage = new MimeMessage();
-                MailboxAddress emailFrom = new MailboxAddress("Admin", "admin@abcd.com");
+                MailboxAddress emailFrom = new MailboxAddress("Admin", "saheelsheikh4076@gmail.com");
                 emailMessage.From.Add(emailFrom);
                 MailboxAddress emailTo = new MailboxAddress(emailData.EmailToName, emailData.EmailToId);
                 emailMessage.To.Add(emailTo);
                 emailMessage.Subject = emailData.EmailSubject;
                 BodyBuilder emailBodyBuilder = new BodyBuilder();
-                emailBodyBuilder.TextBody = emailData.EmailBody;
+                emailBodyBuilder.HtmlBody = emailData.EmailBody;
                 emailMessage.Body = emailBodyBuilder.ToMessageBody();
-                SmtpClient emailClient = new SmtpClient();
-                emailClient.Connect("servername", 547,false);
-                emailClient.Authenticate("username", "password");
-                emailClient.Send(emailMessage);
-                emailClient.Disconnect(true);
-                emailClient.Dispose();
+
+                using (SmtpClient emailClient = new SmtpClient())
+                {
+                    var port = Convert.ToInt32(config.GetSection("EmailSettings:Port").Value);
+                    var sslRequired = Convert.ToBoolean(config.GetSection("EmailSettings:SSL").Value);
+                    emailClient.Connect(config.GetSection("EmailSettings:ServerName").Value??"",port, sslRequired);
+                    emailClient.Authenticate(config.GetSection("EmailSettings:Username").Value, 
+                        config.GetSection("EmailSettings:Password").Value);
+                    emailClient.Send(emailMessage);
+                    emailClient.Disconnect(true);
+                    emailClient.Dispose(); 
+                }
                 return true;
             }
             catch (Exception ex)

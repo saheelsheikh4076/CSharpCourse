@@ -8,10 +8,17 @@
         <input class="form-control" asp-for="Username">
         <span class="text-danger" asp-validation-for="Username"></span>
     </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input class="form-control" asp-for="Email">
+        <span class="text-danger" asp-validation-for="Email"></span>
+    </div>
    <div class="mb-3">
         <label asp-for="Password" class="form-label"></label>
         <input class="form-control" asp-for="Password">
         <span class="text-danger" asp-validation-for="Password"></span>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="text-danger" asp-validation-summary="All"></div>
 </form>
+

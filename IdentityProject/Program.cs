@@ -1,4 +1,5 @@
 using IdentityProject.Data;
+using IdentityProject.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,20 +10,31 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
-    options.User.RequireUniqueEmail = false;
+    options.User.RequireUniqueEmail = true;
     options.Password.RequiredLength = 2;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;
     options.Password.RequireUppercase = false;
-})
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
-
+}).AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
+//builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+//{
+//    options.SignIn.RequireConfirmedAccount = false;
+//    options.User.RequireUniqueEmail = false;
+//    options.Password.RequiredLength = 2;
+//    options.Password.RequireNonAlphanumeric = false;
+//    options.Password.RequireDigit = false;
+//    options.Password.RequireLowercase = false;
+//    options.Password.RequireUppercase = false;
+//})
+//    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddTransient<EmailService>();
+builder.Services.AddMvc();
+builder.Services.AddRazorPages();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
