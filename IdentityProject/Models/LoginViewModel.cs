@@ -11,5 +11,6 @@ namespace IdentityProject.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public Boolean Remember { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 using IdentityProject.Data;
 using IdentityProject.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,11 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Password.RequireUppercase = false;
 }).AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
+builder.Services.AddAuthentication().AddGoogle(options =>
+{
+    options.ClientId = "582011921156-hrk485au76bnn2p529v6idtlk0eups4r.apps.googleusercontent.com";
+    options.ClientSecret = "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";
+});
 //builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 //{
 //    options.SignIn.RequireConfirmedAccount = false;
@@ -33,6 +39,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 //})
 //    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddTransient<EmailService>();
+builder.Services.AddTransient<IEmailSender,EmailService>();
 builder.Services.AddMvc();
 builder.Services.AddRazorPages();
 var app = builder.Build();

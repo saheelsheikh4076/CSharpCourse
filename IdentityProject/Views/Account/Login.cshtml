@@ -3,6 +3,7 @@
 
 }
 <form method="post" asp-action="Login" asp-controller="Account">
+    <input asp-for="ReturnUrl" hidden />
     <div class="mb-3">
         <label asp-for="UserName" class="form-label"></label>
         <input class="form-control" asp-for="UserName">

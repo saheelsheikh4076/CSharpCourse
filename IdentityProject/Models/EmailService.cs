@@ -1,5 +1,6 @@
 ﻿using MimeKit;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace IdentityProject.Models
 {
@@ -10,7 +11,7 @@ namespace IdentityProject.Models
         public string EmailSubject { get; set; }
         public string EmailBody { get; set; }
     }
-    public class EmailService
+    public class EmailService:IEmailSender
     {
         private readonly IConfiguration config;
 
@@ -50,6 +51,17 @@ namespace IdentityProject.Models
                 //Log Exception Details
                 return false;
             }
+        }
+
+        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
+        {
+            SendEmail(new EmailData
+            {
+                EmailBody = htmlMessage,
+                EmailSubject = subject,
+                EmailToId = email,
+                EmailToName = email
+            });
         }
     }
 }

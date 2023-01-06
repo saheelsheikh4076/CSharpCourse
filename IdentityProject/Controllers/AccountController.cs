@@ -1,4 +1,5 @@
 ﻿using IdentityProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
@@ -17,6 +18,37 @@ namespace IdentityProject.Controllers
             this.signinManager = _signinManager;
             this.userManager = userManager;
             this.emailService = emailService;
+        }
+        [Authorize]//This will allow only logged in users to access this action
+        public async Task<IActionResult> ChangePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.GetUserAsync(User);
+                if (user != null)
+                {
+                    var result = await userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Login");
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "User not found, try again");
+                }                
+            }
+            return View(model);
         }
         public async Task<IActionResult> PasswordReset(string userId, string token)
         {
@@ -129,9 +161,11 @@ namespace IdentityProject.Controllers
 
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string ReturnUrl)
         {
-            return View();
+            LoginViewModel model = new LoginViewModel();
+            model.ReturnUrl = ReturnUrl;
+            return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -145,7 +179,14 @@ namespace IdentityProject.Controllers
                    var signInResult = await signinManager.PasswordSignInAsync(user, model.Password,isPersistent: model.Remember, false);
                     if (signInResult.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        if (string.IsNullOrEmpty(model.ReturnUrl))
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            return LocalRedirect(model.ReturnUrl);
+                        }
                     }
                     else
                     {
