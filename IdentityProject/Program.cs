@@ -22,11 +22,16 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Password.RequireUppercase = false;
 }).AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
-builder.Services.AddAuthentication().AddGoogle(options =>
-{
-    options.ClientId = "582011921156-hrk485au76bnn2p529v6idtlk0eups4r.apps.googleusercontent.com";
-    options.ClientSecret = "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";
-});
+builder.Services.AddAuthentication()
+    .AddGoogle(options =>
+    {
+        options.ClientId = "582011921156-hrk485au76bnn2p529v6idtlk0eups4r.apps.googleusercontent.com";
+        options.ClientSecret = "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";
+    }).AddFacebook(options =>
+    {
+        options.AppId = "fsdfs";
+        options.AppSecret = "dfdsf";
+    });
 //builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 //{
 //    options.SignIn.RequireConfirmedAccount = false;
