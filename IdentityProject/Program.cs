@@ -29,8 +29,12 @@ builder.Services.AddAuthentication()
         options.ClientSecret = "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";
     }).AddFacebook(options =>
     {
-        options.AppId = "fsdfs";
-        options.AppSecret = "dfdsf";
+        options.AppId = "554063113440256";
+        options.AppSecret = "3efbb73c4a5fb5c85b5f51f4c98c808e";
+    }).AddTwitter(options =>
+    {
+        options.ConsumerKey = "5540631134";
+        options.ConsumerSecret = "3efbb73c4a5fb5c85b5f51f";
     });
 //builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 //{

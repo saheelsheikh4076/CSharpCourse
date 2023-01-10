@@ -10,15 +10,84 @@ namespace IdentityProject.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signinManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly EmailService emailService;
 
-        public AccountController(UserManager<IdentityUser> userManager, 
-            EmailService emailService, SignInManager<IdentityUser> _signinManager)
+        public AccountController(UserManager<IdentityUser> userManager,
+            EmailService emailService, SignInManager<IdentityUser> _signinManager, RoleManager<IdentityRole> roleManager)
         {
             this.signinManager = _signinManager;
             this.userManager = userManager;
             this.emailService = emailService;
+            this.roleManager = roleManager;
         }
+        public async Task<IActionResult> Roles()
+        {
+            var roles = roleManager.Roles.ToList();
+            return View(roles);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddRole(string RoleName)
+        {
+            var newRole = new IdentityRole(RoleName);
+            var result = await roleManager.CreateAsync(newRole);
+            if (result.Succeeded)
+            {
+                return RedirectToAction(nameof(Roles));
+            }
+            //add error message that failed to add new role
+            return View("Error");
+        }
+        public async Task<IActionResult> Users()
+        {
+            var users = userManager.Users.ToList();
+            return View(users);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                var result = await userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(Users));
+                }
+                //add all errors in loop
+                return View("Error");
+
+            }
+            //add error that user not found
+            return View("Error");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+            if (role != null)
+            {
+                var result = await roleManager.DeleteAsync(role);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Roles");
+                }
+                foreach (var item in result.Errors)
+                {
+                    //add all errors 
+                }
+                //redirect to error page and pass all errors
+                return View("Error");
+            }
+            //add error that role not found
+            return View("Error");
+        }
+
         [Authorize]//This will allow only logged in users to access this action
         public async Task<IActionResult> ChangePassword()
         {

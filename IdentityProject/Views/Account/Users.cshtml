@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model List<IdentityUser>
+@{
+}
+<a asp-controller="Account" asp-action="AddUser" class="btn btn-primary">Add new user</a>
+@if (Model.Any())
+{    
+    <table class="table table-bordered">
+<thead>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+</thead>
+<tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>
+                    <td>
+                        <form method="post" asp-controller="Account" asp-action="DeleteUser" asp-route-id="@item.Id">
+                           <a asp-controller="Account" asp-action="ManageUser" asp-route-id="@item.Id" class="btn btn-warning">Manage</a>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form> 
+                    </td>
+                </tr>
+            }
+        </tbody>
+</table>
+}
+else{
+
+    <h2>No users added</h2>
+}
