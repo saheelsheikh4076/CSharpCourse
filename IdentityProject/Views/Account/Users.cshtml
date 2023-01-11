@@ -21,7 +21,7 @@
                     <td>@item.Email</td>
                     <td>
                         <form method="post" asp-controller="Account" asp-action="DeleteUser" asp-route-id="@item.Id">
-                           <a asp-controller="Account" asp-action="ManageUser" asp-route-id="@item.Id" class="btn btn-warning">Manage</a>
+                            <a asp-controller="Account" asp-action="Profile" asp-route-id="@item.Id" class="btn btn-warning">Manage</a>
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form> 
                     </td>

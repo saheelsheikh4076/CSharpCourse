@@ -1,0 +1,23 @@
+﻿@model ProfileViewModel
+@{
+}
+
+<h2>Username: @Model.Username</h2>
+<h2>Email: @Model.Email</h2>
+
+<h1>Role Assigned</h1>
+
+<form method="post">
+    @if(Model.UserRoles.Any())
+{
+    @for (int i = 0; i < Model.UserRoles.Count; i++)
+    {
+        <label>
+            <input asp-for="@Model.UserRoles[i].IsAssigned">
+            &nbsp; @Model.UserRoles[i].RoleName
+        </label>
+        <br />
+    }
+}
+<button type="submit" class="btn btn-success">Save Changes</button>
+</form>

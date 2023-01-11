@@ -26,6 +26,37 @@ namespace IdentityProject.Controllers
             var roles = roleManager.Roles.ToList();
             return View(roles);
         }
+        //[Route("/Account/UserProfile")]
+        [HttpGet]
+        public async Task<IActionResult> Profile(string id)
+        {
+            var user = await userManager.FindByIdAsync(id).ConfigureAwait(false);
+            if (user == null)
+            {
+                //user not found
+                return View("Error");
+            }
+            var userRoles = await userManager.GetRolesAsync(user).ConfigureAwait(false);
+            var availableRoles = roleManager.Roles;
+            List<AppUserRoles> appUserRoles = new List<AppUserRoles>();
+            foreach (var role in availableRoles)
+            {
+                var isAssigned = userRoles.Where(s => s == role.Name).Any();
+                appUserRoles.Add(new AppUserRoles
+                {
+                    RoleId = role.Id,
+                    UserId = id,
+                    RoleName = role.Name,
+                    IsAssigned = isAssigned
+                });
+            }
+            ProfileViewModel model = new ProfileViewModel();
+            model.Username = user.UserName;
+            model.Email = user.Email;
+           // model.Roles = roleManager.Roles.Select(s => new AppRoles { Id = s.Id, RoleName = s.Name }).ToList();
+            model.UserRoles = appUserRoles;
+            return View(model);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
