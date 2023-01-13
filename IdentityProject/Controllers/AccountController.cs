@@ -21,13 +21,21 @@ namespace IdentityProject.Controllers
             this.emailService = emailService;
             this.roleManager = roleManager;
         }
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> Roles()
         {
+            var user = await userManager.GetUserAsync(User);
+            var isInRole = await userManager.IsInRoleAsync(user, "Admin");
+            if (!isInRole)
+            {
+               var result = await userManager.AddToRoleAsync(user, "Admin");
+            }
             var roles = roleManager.Roles.ToList();
             return View(roles);
         }
         //[Route("/Account/UserProfile")]
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Profile(string id)
         {
             var user = await userManager.FindByIdAsync(id).ConfigureAwait(false);
@@ -60,6 +68,29 @@ namespace IdentityProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateRoles(ProfileViewModel model)
+        {
+            var userId = model.UserRoles.Select(s => s.UserId).FirstOrDefault();
+            var user = await userManager.FindByIdAsync(userId).ConfigureAwait(false);
+            var assignedRoleListOld = await userManager.GetRolesAsync(user).ConfigureAwait(false);
+            var assignedRoleListNew = model.UserRoles.Where(s=>s.IsAssigned).Select(s => s.RoleName);
+            var result = await userManager.RemoveFromRolesAsync(user, assignedRoleListOld).ConfigureAwait(false);
+            if (result.Succeeded)
+            {
+                result = await userManager.AddToRolesAsync(user, assignedRoleListNew).ConfigureAwait(false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Profile", new {id = userId});
+                }
+                //Add error that failed to update roles
+                return View("Error");
+            }
+            //error add (failed to update roles)
+            return View("Error");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddRole(string RoleName)
         {
             var newRole = new IdentityRole(RoleName);
@@ -71,6 +102,7 @@ namespace IdentityProject.Controllers
             //add error message that failed to add new role
             return View("Error");
         }
+        [Authorize]
         public async Task<IActionResult> Users()
         {
             var users = userManager.Users.ToList();
@@ -340,6 +372,10 @@ namespace IdentityProject.Controllers
                 }
             }
             return View(model);
+        }
+        public IActionResult AccessDenied(string ReturnUrl)
+        {
+            return View();
         }
     }
 }

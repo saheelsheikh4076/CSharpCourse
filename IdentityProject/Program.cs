@@ -22,6 +22,20 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Password.RequireUppercase = false;
 }).AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
+
+//builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+//{
+//    options.SignIn.RequireConfirmedAccount = false;
+//    options.User.RequireUniqueEmail = true;
+//    options.Password.RequiredLength = 2;
+//    options.Password.RequireNonAlphanumeric = false;
+//    options.Password.RequireDigit = false;
+//    options.Password.RequireLowercase = false;
+//    options.Password.RequireUppercase = false;
+//}).AddRoles<IdentityRole>()
+//.AddEntityFrameworkStores<ApplicationDbContext>()
+//.AddDefaultTokenProviders();
+
 builder.Services.AddAuthentication()
     .AddGoogle(options =>
     {
@@ -36,6 +50,11 @@ builder.Services.AddAuthentication()
         options.ConsumerKey = "5540631134";
         options.ConsumerSecret = "3efbb73c4a5fb5c85b5f51f";
     });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy",
+         policy => policy.RequireRole("Admin"));
+});
 //builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 //{
 //    options.SignIn.RequireConfirmedAccount = false;
@@ -70,6 +89,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

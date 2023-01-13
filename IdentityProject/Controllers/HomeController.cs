@@ -1,4 +1,5 @@
 ﻿using IdentityProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -18,14 +19,14 @@ namespace IdentityProject.Controllers
             this.webHostEnvironment = webHostEnvironment;
             this.userManager = userManager;
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             var callBackUrl1 = Url.Action("ConfirmEmail", "Account",
                 new { test1 = "hello", test2 = "world" },Request.Scheme);
             return View();
         }
-
+       
         public async Task<IActionResult> Privacy()
         {
             var users = userManager.Users;
