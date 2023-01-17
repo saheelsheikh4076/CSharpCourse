@@ -6,6 +6,7 @@ using System.Text.Encodings.Web;
 
 namespace IdentityProject.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -21,7 +22,10 @@ namespace IdentityProject.Controllers
             this.emailService = emailService;
             this.roleManager = roleManager;
         }
-        [Authorize(Policy = "AdminPolicy")]
+        //[Authorize]//Only logged in user can access/enter
+        //[Authorize(Policy = "AdminPolicy")]//Only AdminPolicy validated user can access
+        //[Authorize(Roles="Admin")]//Only user with Admin role can access
+        [Authorize(Roles="Admin,Teacher")]//only user with either Admin or Teacher can access
         public async Task<IActionResult> Roles()
         {
             var user = await userManager.GetUserAsync(User);
@@ -35,7 +39,7 @@ namespace IdentityProject.Controllers
         }
         //[Route("/Account/UserProfile")]
         [HttpGet]
-        [Authorize]
+     
         public async Task<IActionResult> Profile(string id)
         {
             var user = await userManager.FindByIdAsync(id).ConfigureAwait(false);
@@ -80,6 +84,8 @@ namespace IdentityProject.Controllers
                 result = await userManager.AddToRolesAsync(user, assignedRoleListNew).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
+                   // signinManager.SignInAsync(user, false,);
+
                     return RedirectToAction("Profile", new {id = userId});
                 }
                 //Add error that failed to update roles
@@ -102,7 +108,7 @@ namespace IdentityProject.Controllers
             //add error message that failed to add new role
             return View("Error");
         }
-        [Authorize]
+        [AllowAnonymous]
         public async Task<IActionResult> Users()
         {
             var users = userManager.Users.ToList();
@@ -158,6 +164,7 @@ namespace IdentityProject.Controllers
         }
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (ModelState.IsValid)

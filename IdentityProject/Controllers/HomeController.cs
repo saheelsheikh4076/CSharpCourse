@@ -19,7 +19,7 @@ namespace IdentityProject.Controllers
             this.webHostEnvironment = webHostEnvironment;
             this.userManager = userManager;
         }
-        [Authorize(Roles = "Admin")]
+     
         public IActionResult Index()
         {
             var callBackUrl1 = Url.Action("ConfirmEmail", "Account",
