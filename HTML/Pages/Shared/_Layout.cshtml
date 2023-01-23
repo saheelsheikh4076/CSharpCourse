@@ -37,6 +37,33 @@
             @RenderBody()
         </main>
     </div>
+
+    <div class="container">
+        <h2>Form elements</h2>
+        <form enctype="multipart/form-data">
+            <input type="number" placeholder="2023" title="Enter year" />
+            <input type="email" placeholder="a@a.com" title="Enter email" />
+            <input type="password" title="Enter password" />
+            <input type="date" >
+            <input type="datetime-local" />
+            <textarea rows="4" style="width:100%"></textarea>
+            <input type="file" />
+            <input type="file" multiple/>
+            <input type="button" value="Submit input button"/> &nbsp;
+            <button type="submit">Submit button</button>
+            <select>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+            </select>
+            <label><input type="radio" name="gender" /> Male</label>
+            <label><input type="radio" name="gender" /> Female</label>
+
+            <label><input type="checkbox" /> Are you eligible?</label>
+        </form>
+    </div>
+
+
+
     <div class="container">
         <h1>Definations</h1>
         <dl>
@@ -72,13 +99,72 @@
         <a href="/Privacy">Privacy</a>
         <a href="/Index">Home</a>
     </div>
+    <div class="container">
+        <table class="table table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th>Group.No.</th>
+                    <th>Student Name</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="2">1</td>
+                    <td>aaa</td>
+                    <td>66</td>
+                </tr>
+                <tr>
+                  @*  <td>2</td>*@
+                    <td>bbb</td>
+                    <td rowspan="3">67</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">2</td>
+                    <td>ccc</td>
+                    @*<td>65</td>*@
+                </tr>
+                <tr>
+                    @*<td>4</td>*@
+                    <td>ddd</td>
+                    @*<td>64</td>*@
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2">Total=3</th>
+                   
+                    <th>Average=65.5%</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 
+    <div class="container">
+        <h2>Ordered List</h2>
+        <ol>
+            <li>Laptop</li>
+            <li>Mobile</li>
+            <li>TV</li>
+            <li>Microphone</li>
+        </ol>
+    </div>
+    <div class="container">
+        <h2>Unordered List</h2>
+        <ul>
+            <li>Laptop</li>
+            <li>TV</li>
+            <li>Microwave Oven</li>
+            <li>Washing Machine</li>
+        </ul>
+    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - HTML - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
