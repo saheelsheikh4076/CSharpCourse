@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HTML.styles.css" asp-append-version="true" />
+    @RenderSection("Head",false)
+    <style>
+        tbody, td, tfoot, th, thead, tr {
+            border-color: red;
+            border-style: solid;
+            border-width: 0;
+        }
+        </style>
 </head>
 <body>
     <header>
@@ -37,7 +45,16 @@
             @RenderBody()
         </main>
     </div>
-
+    
+    <section>
+        <div class="container">
+            <h2>I am in a section</h2>
+</div>
+    </section>
+    <div class="container">
+        <h2>IFrame</h2>
+        <iframe src="https://nassmedia.co/" width="200" height="200"></iframe>
+    </div>
     <div class="container">
         <h2>Form elements</h2>
         <form enctype="multipart/form-data">
@@ -59,6 +76,10 @@
             <label><input type="radio" name="gender" /> Female</label>
 
             <label><input type="checkbox" /> Are you eligible?</label>
+            <br />
+            <img src="~/Images/login.png" height="100px" />
+            
+            <img src="https://png.pngtree.com/png-vector/20191003/ourmid/pngtree-user-login-or-authenticate-icon-on-gray-background-flat-icon-ve-png-image_1786166.jpg" height="100px" alt="Login Image" />
         </form>
     </div>
 
@@ -99,46 +120,7 @@
         <a href="/Privacy">Privacy</a>
         <a href="/Index">Home</a>
     </div>
-    <div class="container">
-        <table class="table table-bordered table-dark">
-            <thead>
-                <tr>
-                    <th>Group.No.</th>
-                    <th>Student Name</th>
-                    <th>Percentage</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td rowspan="2">1</td>
-                    <td>aaa</td>
-                    <td>66</td>
-                </tr>
-                <tr>
-                  @*  <td>2</td>*@
-                    <td>bbb</td>
-                    <td rowspan="3">67</td>
-                </tr>
-                <tr>
-                    <td rowspan="2">2</td>
-                    <td>ccc</td>
-                    @*<td>65</td>*@
-                </tr>
-                <tr>
-                    @*<td>4</td>*@
-                    <td>ddd</td>
-                    @*<td>64</td>*@
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="2">Total=3</th>
-                   
-                    <th>Average=65.5%</th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+  
 
     <div class="container">
         <h2>Ordered List</h2>
