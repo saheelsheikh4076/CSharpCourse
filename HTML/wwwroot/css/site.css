@@ -27,3 +27,10 @@ body {
 .mytable > tbody > tr, .mytable > tbody > tr > td, .mytable > thead > tr > th, .mytable > tfoot > tr > th {
     border: solid 1px black;
 }
+button,input{
+    background-color:lightcoral
+}
+
+#selectOptions {
+    border-color: red;
+}

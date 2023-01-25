@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce", "ECommerce\ECom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityProject", "IdentityProject\IdentityProject.csproj", "{F73FF959-93C0-4AAF-9C11-D4874C9977E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTML", "HTML\HTML.csproj", "{54ED584B-DF68-4078-BE48-65D580BFC80F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HTML", "HTML\HTML.csproj", "{54ED584B-DF68-4078-BE48-65D580BFC80F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
