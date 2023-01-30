@@ -23,14 +23,19 @@ body {
 
 /*        . dot is used to define styles by class. # is used to define styles by Id
                       element name or tag name is used to define styles by tag                            */
+
+/*By Class*/
 .mytable, .mytable > tbody, .mytable > thead, .mytable > tfoot,
 .mytable > tbody > tr, .mytable > tbody > tr > td, .mytable > thead > tr > th, .mytable > tfoot > tr > th {
     border: solid 1px black;
 }
+/*By Element*/
 button,input{
     background-color:lightcoral
 }
 
-#selectOptions {
+
+/*By ID*/
+#selectOptions { 
     border-color: red;
 }

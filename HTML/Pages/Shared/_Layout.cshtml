@@ -35,6 +35,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Html">Html</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Java">Java</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -46,100 +52,7 @@
         </main>
     </div>
     
-    <section>
-        <div class="container">
-            <h2>I am in a section</h2>
-</div>
-    </section>
-    <div class="container">
-        <h2>IFrame</h2>
-        <iframe src="https://nassmedia.co/" width="200" height="200"></iframe>
-    </div>
-    <div class="container">
-        <h2>Form elements</h2>
-        <form enctype="multipart/form-data">
-            <input type="number" placeholder="2023" title="Enter year" />
-            <input type="email" placeholder="a@a.com" title="Enter email" />
-            <input type="password" title="Enter password" />
-            <input type="date" >
-            <input type="datetime-local" />
-            <textarea rows="4" style="width:100%"></textarea>
-            <input type="file" />
-            <input type="file" multiple/>
-            <input type="button" value="Submit input button"/> &nbsp;
-            <button type="submit">Submit button</button>
-            <select>
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-            </select>
-            <label><input type="radio" name="gender" /> Male</label>
-            <label><input type="radio" name="gender" /> Female</label>
-
-            <label><input type="checkbox" /> Are you eligible?</label>
-            <br />
-            <img src="~/Images/login.png" height="100px" />
-            
-            <img src="https://png.pngtree.com/png-vector/20191003/ourmid/pngtree-user-login-or-authenticate-icon-on-gray-background-flat-icon-ve-png-image_1786166.jpg" height="100px" alt="Login Image" />
-        </form>
-    </div>
-
-
-
-    <div class="container">
-        <h1>Definations</h1>
-        <dl>
-            <dt>Coffee</dt>
-            <dd>- black hot drink</dd>
-            <dt>Milk</dt>
-            <dd>- white cold drink</dd>
-        </dl>
-    </div>
-    <div class="container">
-        <strong>This is a code</strong>
-        <code>int i = 20;</code>
-    </div>
-    <div class="container">
-        <strong>the short cut for formating the .net cshtml document is </strong>
-        <kbd>ctrl+k ctrl+f</kbd>
-
-    </div>
-    <div class="container">
-        <pre>
-            Text         in a pre element   
-            is displayed in a fixed-width
-            font, and it preserves
-            both      spaces and
-            line breaks.
-           
-        </pre>
-    </div>
-    <div class="container">
-        <a href="https://www.google.com/" target="_blank">Go to google</a>
-        <a href="~/favicon.ico">Icon</a>
-        <a href="#div1">Go to top</a>
-        <a href="/Privacy">Privacy</a>
-        <a href="/Index">Home</a>
-    </div>
-  
-
-    <div class="container">
-        <h2>Ordered List</h2>
-        <ol>
-            <li>Laptop</li>
-            <li>Mobile</li>
-            <li>TV</li>
-            <li>Microphone</li>
-        </ol>
-    </div>
-    <div class="container">
-        <h2>Unordered List</h2>
-        <ul>
-            <li>Laptop</li>
-            <li>TV</li>
-            <li>Microwave Oven</li>
-            <li>Washing Machine</li>
-        </ul>
-    </div>
+   
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -151,6 +64,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+   
+
+
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
