@@ -2,17 +2,104 @@
 @model HTML.Pages.JavaModel
 @{
 }
-
-<input placeholder="email" id="email" />
-<input placeholder="password" id="password" type="password" />
-<div id="divmessage">
-    <a href="#">click</a>
+@section Head{
+    <style>
+        .topics{
+           border-style:solid; 
+           border-color:red;
+           padding:10px 10px 10px 10px;
+           margin: 20px 20px 20px 20px;
+        }
+    </style>
+}
+<div class="topics">
+    <h1>visual Events & types</h1>
+    <input id="x2"/>
+    <span id="result2"></span>
 </div>
-<button type="button" onclick="login()">Login</button>
+<div class="topics">
+    <h1>Change Events & types</h1>
+    <input id="x1" />
+    <span id="result1"></span>
+</div>
+<div class="topics">
+    <h1>Getting Values in JavaScript/JQuery</h1>
+    <input placeholder="email" id="email" />
+    <input placeholder="password" id="password" type="password" />
+    <div id="divmessage">
+        <a href="#">click</a>
+    </div>
+    <button type="button" onclick="login()">Login</button>
+</div>
+<div class="topics">
+    <h1>Calculations</h1>
+    <label>x:
+        <input type="number" id="x"/>
+    </label>
+    <br />
+    <label>y:
+        <input type="number" id="y" />
+    </label>
+    <br />
+    <button type="button" onclick="add();">Add</button>
+    <button type="button" onclick="subtract();">subtract</button>
+    <button type="button" onclick="multiply();">multiply</button>
+    <button type="button" onclick="divide();">divide</button>
+    <br />
+    <label>Result:
+        <span id="result"></span>
+    </label>
+</div>
 @section Scripts{
+    <script>
+        $("#x2").on("mouseover", function () {
+            $("#result2").text("on hover event fired")
 
-     <script>
-         function login(){
+        })
+        //function fire(){
+        //    $("#result2").text("on hover event fired")
+        //}
+
+
+    </script>
+    <script>
+        //on change event
+        $("#x1").change(function(){  //specific selector .topics #x
+            
+        })
+        $("#x1").on("keyup",function(){
+            $("#result1").text($("#x1").val())
+        })
+        $("#x1").on("keydown",function(){
+        })
+        $("#x1").on("keypress",function(){
+        })
+
+    </script>
+
+
+    <script>
+        function add(){
+            var x = parseInt($("#x").val());
+            var y = parseInt($("#y").val());
+            $("#result").text(x+y)
+        }
+        function subtract() {
+            var x = parseInt($("#x").val());
+            var y = parseInt($("#y").val());
+            $("#result").text(x - y)
+        }
+        function multiply() {
+            var x = parseInt($("#x").val());
+            var y = parseInt($("#y").val());
+            $("#result").text(x * y)
+        }
+        function divide() {
+            var x = parseInt($("#x").val());
+            var y = parseInt($("#y").val());
+            $("#result").text(x / y)
+        }
+        function login() {
             var email = $("#email").val(); var password = $("#password").val();//Variables declared by var are available throughout the function in which they’re declared.
 
             let address = "hello";//Variables declared by let are only available inside the block where they’re defined.
@@ -23,16 +110,16 @@
             console.log($("#divmessage").text())//reads only text of element
             console.log($("#divmessage").html())//reads complete html within element
 
-            console.log("Email is " + email + " and password is " + password + " addres is "+ address)
-         }
-            //function myfunction(){
-            //    alert("Site loaded successfully")//executes on page load event
-            //}
-            //$(myfunction)
-            $(function () {
-              //  alert("Site loaded successfully")//executes on page load event
-            })
+            console.log("Email is " + email + " and password is " + password + " addres is " + address)
+        }
+        //function myfunction(){
+        //    alert("Site loaded successfully")//executes on page load event
+        //}
+        //$(myfunction)
+        $(function () {
+            //  alert("Site loaded successfully")//executes on page load event
+        })
 
-        </script>
+    </script>
 
 }
