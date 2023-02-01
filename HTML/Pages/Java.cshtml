@@ -52,6 +52,12 @@
 </div>
 @section Scripts{
     <script>
+        //To get values of all input elements whose name = 'email' as array 
+        //var values = $("input[name='email']")
+        //    .map(function () { return $(this).val(); }).get();
+        $("input").val()
+    </script>
+    <script>
         $("#x2").on("mouseover", function () {
             $("#result2").text("on hover event fired")
 
@@ -82,6 +88,23 @@
         function add(){
             var x = parseInt($("#x").val());
             var y = parseInt($("#y").val());
+            if(x==y){
+
+            }
+            else{
+
+            }
+            switch(x){
+                case 1:
+                break;
+                case 2:
+                break;
+                default:
+                break;
+            }
+            for(x= 0;x<10;x++){
+
+            }
             $("#result").text(x+y)
         }
         function subtract() {
