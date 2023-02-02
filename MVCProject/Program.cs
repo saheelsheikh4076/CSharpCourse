@@ -14,8 +14,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 builder.Services.AddDataProtection();
 builder.Services.AddMvc();
+builder.Services.AddRazorPages();
 builder.Services.AddSingleton<IRollList, RollList>();
-builder.Services.AddTransient<IStudent,StudentServiceEF>();
+builder.Services.AddTransient<IStudent, StudentServiceEF1>();
 
 var app = builder.Build();
 
@@ -35,9 +36,9 @@ app.UseRouting();
 app.UseAuthentication();//Login system
 
 app.UseAuthorization();//Roles
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Student}/{action=Students}/{id?}");
+
 
 app.Run();

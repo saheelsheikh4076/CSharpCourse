@@ -67,7 +67,7 @@ namespace MVCProject.Controllers
             if (ModelState.IsValid)
             {
                 await student.AddStudent(model);
-                return RedirectToAction("Students");
+                return RedirectToAction("Students","student");
             }
             //ModelState.AddModelError("", "Its my error");
             return View(model);

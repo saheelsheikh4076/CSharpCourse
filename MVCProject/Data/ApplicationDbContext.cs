@@ -10,7 +10,17 @@ namespace MVCProject.Data
 
         }
         public DbSet<StudentTable> StudentTable { get; set; }
+        public DbSet<StudentTable1> StudentTable1 { get; set; }
         public DbSet<GenderTable> GenderTable { get; set; }
+    }
+    public class StudentTable1
+    {
+        [Key]
+        public int Id { get; set; }
+        [MaxLength(20)]
+        public string Name { get; set; }
+        public int? Age { get; set; }
+        public string Gender { get; set; }
     }
     public class StudentTable
     {
