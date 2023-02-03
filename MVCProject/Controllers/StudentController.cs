@@ -241,6 +241,7 @@ namespace MVCProject.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(string text)
         {
             List<StudentIndexViewModel> model = new();

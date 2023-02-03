@@ -28,7 +28,10 @@ namespace MVCProject.Controllers
             //It combines Layout and its view and generates complete
             //html page which is rendered to client side
         }
-
+        public IActionResult ApiTest()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

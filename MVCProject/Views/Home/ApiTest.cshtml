@@ -1,0 +1,131 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+
+@{
+}
+<form method="post"></form>
+@section Head{
+    <link href="~/lib/datatables/css/jquery.datatables.min.css" rel="stylesheet" />
+}
+
+@section Scripts{
+    <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+    <script src="~/js/ajax.js" asp-append-version="true"></script>
+<script>
+        //$(document).ready(function () {
+        //    $('#myTable').DataTable();
+        //});
+        $(function(){
+            var t = $("#myTable").DataTable();
+            GetMethodAjax("/Student/GetStudentsApi","",function(response){
+                if(response.isSuccess == true){
+                    var data = response.data
+
+                    console.log(data)
+                    if (data.length == 0) {
+                        t.clear().draw();
+                        //    $("#datatableRollList").hide();
+                        alert("No Record Found")
+                    }
+                    else {
+                        //var t = $('#datatableRollList').DataTable();
+                        t.clear().draw();
+                        data.forEach(function (value) {
+                            //console.log(value)
+                            t.row.add([
+                                value.id,
+                                value.name,
+                                value.age,
+                                value.gender
+                                //`<button type='button' class='button button-border button-border-thin button-red btnDelete'><i class="icon-trash-alt"></i>Delete</button>`
+                            ]).draw(false);
+                        })
+                        
+                    }
+
+
+
+
+
+                }
+                else{
+                    console.log("Error:"+response.message)
+                }
+                
+
+                //$('#myTable').DataTable({
+                //    data: dataSet,
+                //    columns: [
+                //        { title: 'id' },
+                //        { title: 'name' },
+                //        { title: 'age' },
+                //        { title: 'gender' }
+                //    ],
+                //});
+
+            },function(){
+                console.log(response)
+            })
+        })
+
+
+
+
+
+        function RollListsuccess(data) {
+            //console.log(data)
+            if (data.isSuccess == false) {
+                // $("#datatableRollList").hide();
+                toastr.error(data.errorMessage)
+            }
+            if (data.isSuccess == true) {
+                if (data.model.length == 0) {
+                    //var t = $('#datatableRollList').DataTable({
+                    //    dom: 'Bfrtip',
+                    //    buttons: [
+                    //        'copy', 'csv', 'excel', 'pdf', 'print'
+                    //    ]
+                    //});
+                    t.clear().draw();
+                    //    $("#datatableRollList").hide();
+                    toastr.info("No Record Found")
+                }
+                else {                    
+                    //var t = $('#datatableRollList').DataTable();
+                    t.clear().draw();
+                    data.model.forEach(function(value){
+                        //console.log(value)
+                        t.row.add([
+                            //value.studentId,
+                            value.enrollmentNo,
+                            value.studentName,
+                            //value.fatherName,
+                            value.casteCategory
+                            //`<button type='button' class='button button-border button-border-thin button-red btnDelete'><i class="icon-trash-alt"></i>Delete</button>`
+                        ]).draw(false);
+                    })
+                    $("#spanModalCount").text(data.model.length)
+                    
+                }
+            }
+        }
+</script>
+
+}
+<h1>Student List</h1>
+<table id="myTable">
+
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
