@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using MVCProject.Data;
 using Services;
 using System.Collections.Generic;
+using System.Text.Encodings.Web;
+using System.Web;
 using ViewModels;
 
 namespace MVCProject.Services
@@ -30,7 +32,7 @@ namespace MVCProject.Services
 
         public async Task DeleteStudent(string id)
         {
-            var intId = Convert.ToInt32(protector.Unprotect(id));
+            var intId = Convert.ToInt32(protector.Unprotect(HttpUtility.HtmlDecode(id)));
             var student = await dbContext.StudentTable1.FindAsync(intId);
             if (student != null)
             {
@@ -48,13 +50,13 @@ namespace MVCProject.Services
                 Age = s.Age,
                 Gender = s.Gender == "Male"? (byte)1:(byte)2
             }).ToListAsync();
-            studets.ForEach(s => s.ProtectedId = protector.Protect(s.Id.ToString()));
+            studets.ForEach(s => s.ProtectedId = HttpUtility.HtmlEncode(protector.Protect(s.Id.ToString())));
             return studets;
         }
 
         public async Task<StudentViewModel> GetStudentById(string id)
         {
-            var intId = Convert.ToInt32(protector.Unprotect(id));
+            var intId = Convert.ToInt32(protector.Unprotect(HttpUtility.HtmlDecode(id)));
 
             var student = await dbContext.StudentTable1.FindAsync(intId);
             StudentViewModel model = new StudentViewModel();

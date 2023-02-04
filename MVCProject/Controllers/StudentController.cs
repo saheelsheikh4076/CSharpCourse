@@ -30,6 +30,7 @@ namespace MVCProject.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> GetStudentsApi()
+        
         {
             try
             {

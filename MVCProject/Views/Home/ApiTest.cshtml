@@ -7,6 +7,11 @@
 @{
 }
 <form method="post"></form>
+
+
+<button type="button" onclick="DeleteStudent('sdfd23r324');">Delete</button>
+
+
 @section Head{
     <link href="~/lib/datatables/css/jquery.datatables.min.css" rel="stylesheet" />
 }
@@ -19,16 +24,92 @@
         //    $('#myTable').DataTable();
         //});
         $(function(){
+            GetStudentData();
+        })
+         
+        function GetStudentById(id){
+            var data = {
+                "StudentId": id
+            }
+            GetMethodAjax("/Student/GetStudentByIdApi", data,
+                function (response) {
+                    if (response.isSuccess = true) {
+                        $("#studentName").val(response.data.name),
+                        $("#studentAge").val(response.data.age),
+                        $("#studentGender").val(response.data.gender)
+                        $("#studentId").val(response.data.protectedId)
+                    }
+                    else {
+                        alert("Failed:" + response.message)
+                    }
+                }, function (response) {
+                    console.log(response)
+                })
+        }
+        function AddStudent()
+        {
+            var data = {
+                'Name': $("#studentName").val(),
+                'Age': $("#studentAge").val(),
+                'Gender': $("#studentGender").val()
+            }
+            PostMethodAjax("/Student/AddStudentApi",data,
+            function(response){
+                if(response.isSuccess==true){
+                        GetStudentData();
+                }
+                else{
+                    alert("Error:"+response.message)
+                }
+            })
+        }
+        function UpdateStudent(){
+            var data = {
+                'Name': $("#studentName").val(),
+                'Age': $("#studentAge").val(),
+                'Gender': $("#studentGender").val(),
+                'ProtectedId':$("#studentId").val()
+            }
+            PostMethodAjax("/Student/UpdateStudentApi", data,
+                function (response) {
+                    if (response.isSuccess == true) {
+                        GetStudentData();
+                    }
+                    else {
+                        alert("Error:" + response.message)
+                    }
+                })
+        }
+        function DeleteStudent(id){
+            if(!confirm("Are you sure you want to delete?")){
+                return false;
+            }
+            var data = {
+                "StudentId":id
+            }
+            PostMethodAjax("/Student/DeleteStudentApi",data,
+            function(response){
+                if(response.isSuccess = true){
+                        GetStudentData();
+                }
+                else{
+                    alert("Failed:"+response.message)
+                }
+            },function(response){
+                console.log(response)
+            })
+        }
+        function GetStudentData(){
             var t = $("#myTable").DataTable();
-            GetMethodAjax("/Student/GetStudentsApi","",function(response){
-                if(response.isSuccess == true){
+            GetMethodAjax("/Student/GetStudentsApi", "", function (response) {
+                if (response.isSuccess == true) {
                     var data = response.data
 
-                    console.log(data)
+                    //console.log(data)
                     if (data.length == 0) {
                         t.clear().draw();
                         //    $("#datatableRollList").hide();
-                        alert("No Record Found")
+                        //alert("No Record Found")
                     }
                     else {
                         //var t = $('#datatableRollList').DataTable();
@@ -39,11 +120,13 @@
                                 value.id,
                                 value.name,
                                 value.age,
-                                value.gender
-                                //`<button type='button' class='button button-border button-border-thin button-red btnDelete'><i class="icon-trash-alt"></i>Delete</button>`
+                                value.gender,
+                                `<button type="button" onclick="DeleteStudent('`+value.protectedId+`');">Delete</button>
+                                                <button type="button" onclick="GetStudentById('`+ value.protectedId + `')">Edit</button>
+                                `
                             ]).draw(false);
                         })
-                        
+
                     }
 
 
@@ -51,10 +134,10 @@
 
 
                 }
-                else{
-                    console.log("Error:"+response.message)
+                else {
+                    console.log("Error:" + response.message)
                 }
-                
+
 
                 //$('#myTable').DataTable({
                 //    data: dataSet,
@@ -66,55 +149,37 @@
                 //    ],
                 //});
 
-            },function(){
+            }, function () {
                 console.log(response)
             })
-        })
-
-
-
-
-
-        function RollListsuccess(data) {
-            //console.log(data)
-            if (data.isSuccess == false) {
-                // $("#datatableRollList").hide();
-                toastr.error(data.errorMessage)
-            }
-            if (data.isSuccess == true) {
-                if (data.model.length == 0) {
-                    //var t = $('#datatableRollList').DataTable({
-                    //    dom: 'Bfrtip',
-                    //    buttons: [
-                    //        'copy', 'csv', 'excel', 'pdf', 'print'
-                    //    ]
-                    //});
-                    t.clear().draw();
-                    //    $("#datatableRollList").hide();
-                    toastr.info("No Record Found")
-                }
-                else {                    
-                    //var t = $('#datatableRollList').DataTable();
-                    t.clear().draw();
-                    data.model.forEach(function(value){
-                        //console.log(value)
-                        t.row.add([
-                            //value.studentId,
-                            value.enrollmentNo,
-                            value.studentName,
-                            //value.fatherName,
-                            value.casteCategory
-                            //`<button type='button' class='button button-border button-border-thin button-red btnDelete'><i class="icon-trash-alt"></i>Delete</button>`
-                        ]).draw(false);
-                    })
-                    $("#spanModalCount").text(data.model.length)
-                    
-                }
-            }
         }
+
+
+
+
+     
 </script>
 
 }
+
+<div>
+    <input hidden id="studentId" />
+    <label>Enter student name:
+        <input id="studentName" />
+    </label>
+    <label>
+        Enter age:
+        <input type="number" id="studentAge" />
+    </label>
+    <label>
+        Enter Gender 1 or 2:
+        <input type="number" id="studentGender" />
+    </label>
+    <br />
+    <button type="button" onclick="AddStudent()">Add new student</button>
+    <button type="button" onclick="UpdateStudent()">Update Student</button>
+
+</div>
 <h1>Student List</h1>
 <table id="myTable">
 
@@ -124,6 +189,7 @@
             <th>Name</th>
             <th>Age</th>
             <th>Gender</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody></tbody>
